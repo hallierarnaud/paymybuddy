@@ -1,10 +1,12 @@
 package com.openclassrooms.paymybuddy.model.entity;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +24,7 @@ public class UserContactEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @Column(columnDefinition = "email", nullable = false, length = 50)
-  private String email;
+  @ManyToMany
+  private List<UserEntity> userEntities;
 
 }

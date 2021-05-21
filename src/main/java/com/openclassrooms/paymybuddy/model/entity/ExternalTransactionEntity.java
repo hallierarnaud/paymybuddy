@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +28,13 @@ public class ExternalTransactionEntity {
   @Column(columnDefinition = "description", length = 200)
   private String description;
 
-  @Column(columnDefinition = "transferedAmount")
-  private Double transferedAmount;
+  @Column(columnDefinition = "transferredAmount")
+  private Double transferredAmount;
+
+  @ManyToOne
+  private InternalAccountEntity internalAccountEntity;
+
+  @ManyToOne
+  private ExternalAccountEntity externalAccountEntity;
 
 }
