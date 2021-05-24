@@ -1,15 +1,11 @@
 package com.openclassrooms.paymybuddy.model.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,12 +28,16 @@ public class InternalAccountEntity {
   private Double balance;
 
   @OneToOne
+  @JoinColumn(columnDefinition = "user_id")
   private UserEntity userEntity;
 
-  @OneToMany(mappedBy = "internalAccountEntity")
-  private List<ExternalTransactionEntity> externalTransactionEntities;
+  @OneToOne(mappedBy = "internalAccountEntity")
+  private ExternalTransactionEntity externalTransactionEntity;
 
-  @ManyToMany(mappedBy = "internalAccountEntities")
-  private List<InternalTransactionEntity> internalTransactionEntities;
+  @OneToOne(mappedBy = "senderAccountEntity")
+  private InternalTransactionEntity internalTransactionEntitySender;
+
+  @OneToOne(mappedBy = "recipientAccountEntity")
+  private InternalTransactionEntity internalTransactionEntityRecipient;
 
 }
