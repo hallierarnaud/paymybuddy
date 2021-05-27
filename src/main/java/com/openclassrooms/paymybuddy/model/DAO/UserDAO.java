@@ -56,4 +56,8 @@ public class UserDAO {
     userRepository.deleteById(id);
   }
 
+  public boolean existById(Long id) {
+    return userRepository.existsById(id);
+  }
+
 }
