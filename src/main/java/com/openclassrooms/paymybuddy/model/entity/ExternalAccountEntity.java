@@ -26,7 +26,7 @@ public class ExternalAccountEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @Column(columnDefinition = "IBAN", nullable = false, length = 50)
+  @Column(name = "iban", nullable = false, length = 50)
   private String iban;
 
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

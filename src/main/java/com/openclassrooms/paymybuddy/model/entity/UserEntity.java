@@ -31,13 +31,13 @@ public class UserEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @Column(columnDefinition = "lastName", nullable = false, length = 50)
+  @Column(name = "lastname", nullable = false, length = 50)
   private String lastname;
 
-  @Column(columnDefinition = "firstName", nullable = false, length = 50)
+  @Column(name = "firstname", nullable = false, length = 50)
   private String firstname;
 
-  @Column(columnDefinition = "birthdate", nullable = false)
+  @Column(name = "birthdate", nullable = false)
   private Date birthdate;
 
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

@@ -26,10 +26,10 @@ public class ExternalTransactionEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(columnDefinition = "description", length = 200)
+  @Column(name = "description", length = 200)
   private String description;
 
-  @Column(columnDefinition = "transferredAmount")
+  @Column(name = "transferredamount")
   private Double transferredAmount;
 
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

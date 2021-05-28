@@ -23,10 +23,10 @@ public class LoginEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @Column(columnDefinition = "email", nullable = false, length = 50)
+  @Column(name = "email", nullable = false, length = 50)
   private String email;
 
-  @Column(columnDefinition = "password", nullable = false, length = 50)
+  @Column(name = "password", nullable = false, length = 50)
   private String password;
 
   @OneToOne(mappedBy = "loginEntity")

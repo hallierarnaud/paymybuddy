@@ -26,7 +26,7 @@ public class InternalAccountEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @Column(columnDefinition = "balance", nullable = false)
+  @Column(name = "balance", nullable = false)
   private Double balance;
 
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
