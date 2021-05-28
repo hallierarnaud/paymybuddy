@@ -1,7 +1,9 @@
 package com.openclassrooms.paymybuddy.model.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,8 +29,8 @@ public class ExternalAccountEntity {
   @Column(columnDefinition = "IBAN", nullable = false, length = 50)
   private String iban;
 
-  @OneToOne
-  @JoinColumn(columnDefinition = "user_id")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_id")
   private UserEntity userEntity;
 
   @OneToOne(mappedBy = "externalAccountEntity")

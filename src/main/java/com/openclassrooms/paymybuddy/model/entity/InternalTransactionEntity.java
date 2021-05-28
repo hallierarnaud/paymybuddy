@@ -1,7 +1,9 @@
 package com.openclassrooms.paymybuddy.model.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,12 +32,12 @@ public class InternalTransactionEntity {
   @Column(columnDefinition = "transferredAmount")
   private Double transferredAmount;
 
-  @OneToOne
-  @JoinColumn(columnDefinition = "sender_internalaccount_id")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @JoinColumn(name = "sender_internalaccount_id")
   private InternalAccountEntity senderAccountEntity;
 
-  @OneToOne
-  @JoinColumn(columnDefinition = "recipient_internalaccount_id")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @JoinColumn(name = "recipient_internalaccount_id")
   private InternalAccountEntity recipientAccountEntity;
 
 }

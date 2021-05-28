@@ -3,8 +3,10 @@ package com.openclassrooms.paymybuddy.model.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,8 +40,8 @@ public class UserEntity {
   @Column(columnDefinition = "birthdate", nullable = false)
   private Date birthdate;
 
-  @OneToOne
-  @JoinColumn(columnDefinition = "login_id")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @JoinColumn(name = "login_id")
   private LoginEntity loginEntity;
 
   @OneToOne(mappedBy = "userEntity")

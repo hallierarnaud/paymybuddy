@@ -1,6 +1,8 @@
 package com.openclassrooms.paymybuddy.model.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,12 +26,12 @@ public class ContactEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
-  @OneToOne
-  @JoinColumn(columnDefinition = "user_id")
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_id")
   private UserEntity userEntity;
 
-  @ManyToOne
-  @JoinColumn(columnDefinition = "user_contact_id")
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_contact_id")
   private UserEntity userEntityAsContact;
 
 }
