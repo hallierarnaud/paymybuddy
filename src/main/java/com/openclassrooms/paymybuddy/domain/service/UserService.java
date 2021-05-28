@@ -41,7 +41,7 @@ public class UserService {
     }
     User user = userDAO.findById(id);
     user.setId(id);
-    user.setLastname(user.getLastname());
+    user.setLastname(userRequest.getLastname());
     user.setFirstname(userRequest.getFirstname());
     user.setBirthdate(userRequest.getBirthdate());
     return userDAO.updateUser(id, user);
