@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class ExternalAccountEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @Column(name = "iban", nullable = false, length = 50)

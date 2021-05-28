@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class InternalTransactionEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @Column(name = "description", length = 200)

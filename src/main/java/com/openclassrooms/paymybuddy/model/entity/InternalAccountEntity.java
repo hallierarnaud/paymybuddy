@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class InternalAccountEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @Column(name = "balance", nullable = false)
