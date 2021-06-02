@@ -37,40 +37,40 @@ public class MapDAO {
   }
 
   public Login updateLoginWithLoginEntity (Login login, LoginEntity loginEntity) {
-    loginEntity.setId(login.getId());
-    loginEntity.setEmail(login.getEmail());
-    loginEntity.setPassword(login.getPassword());
+    login.setId(loginEntity.getId());
+    login.setEmail(loginEntity.getEmail());
+    login.setPassword(loginEntity.getPassword());
     return login;
   }
 
   public InternalTransaction updateInternalTransactionWithInternalTransactionEntity (InternalTransaction internalTransaction, InternalTransactionEntity internalTransactionEntity) {
-    internalTransactionEntity.setId(internalTransaction.getId());
-    internalTransactionEntity.setDescription(internalTransaction.getDescription());
-    internalTransactionEntity.setTransferredAmount(internalTransaction.getTransferredAmount());
+    internalTransaction.setId(internalTransactionEntity.getId());
+    internalTransaction.setDescription(internalTransactionEntity.getDescription());
+    internalTransaction.setTransferredAmount(internalTransactionEntity.getTransferredAmount());
     return internalTransaction;
   }
 
   public InternalAccount updateInternalAccountWithInternalAccountEntity (InternalAccount internalAccount, InternalAccountEntity internalAccountEntity) {
-    internalAccountEntity.setId(internalAccount.getId());
-    internalAccountEntity.setBalance(internalAccount.getBalance());
+    internalAccount.setId(internalAccountEntity.getId());
+    internalAccount.setBalance(internalAccountEntity.getBalance());
     return internalAccount;
   }
 
   public ExternalTransaction updateExternalTransactionWithExternalTransactionEntity (ExternalTransaction externalTransaction, ExternalTransactionEntity externalTransactionEntity) {
-    externalTransactionEntity.setId(externalTransaction.getId());
-    externalTransactionEntity.setDescription(externalTransaction.getDescription());
-    externalTransactionEntity.setTransferredAmount(externalTransaction.getTransferredAmount());
+    externalTransaction.setId(externalTransactionEntity.getId());
+    externalTransaction.setDescription(externalTransactionEntity.getDescription());
+    externalTransaction.setTransferredAmount(externalTransactionEntity.getTransferredAmount());
     return externalTransaction;
   }
 
   public ExternalAccount updateExternalAccountWithExternalAccountEntity (ExternalAccount externalAccount, ExternalAccountEntity externalAccountEntity) {
-    externalAccountEntity.setId(externalAccount.getId());
-    externalAccountEntity.setIban(externalAccount.getIban());
+    externalAccount.setId(externalAccountEntity.getId());
+    externalAccount.setIban(externalAccountEntity.getIban());
     return externalAccount;
   }
 
   public Contact updateContactWithContactEntity (Contact contact, ContactEntity contactEntity) {
-    contactEntity.setId(contact.getId());
+    contact.setId(contactEntity.getId());
     return contact;
   }
 
