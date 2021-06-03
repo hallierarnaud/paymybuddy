@@ -2,6 +2,8 @@ package com.openclassrooms.paymybuddy.controllerTest;
 
 import com.openclassrooms.paymybuddy.controller.endpoint.UserController;
 import com.openclassrooms.paymybuddy.domain.object.User;
+import com.openclassrooms.paymybuddy.domain.service.InputReader;
+import com.openclassrooms.paymybuddy.domain.service.LoginService;
 import com.openclassrooms.paymybuddy.domain.service.UserService;
 
 import org.junit.jupiter.api.Test;
@@ -33,6 +35,12 @@ public class UserControllerTest {
 
   @MockBean
   private UserService userService;
+
+  @MockBean
+  private LoginService loginService;
+
+  @MockBean
+  private InputReader inputReader;
 
   @Test
   public void getUserById_shouldReturnOk() throws Exception {

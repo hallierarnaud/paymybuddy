@@ -43,6 +43,13 @@ public class MapDAO {
     return login;
   }
 
+  public LoginEntity updateLoginEntityWithLogin (LoginEntity loginEntity, Login login) {
+    loginEntity.setId(login.getId());
+    loginEntity.setEmail(login.getEmail());
+    loginEntity.setPassword(login.getPassword());
+    return loginEntity;
+  }
+
   public InternalTransaction updateInternalTransactionWithInternalTransactionEntity (InternalTransaction internalTransaction, InternalTransactionEntity internalTransactionEntity) {
     internalTransaction.setId(internalTransactionEntity.getId());
     internalTransaction.setDescription(internalTransactionEntity.getDescription());

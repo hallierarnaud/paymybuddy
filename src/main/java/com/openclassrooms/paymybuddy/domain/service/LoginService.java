@@ -15,6 +15,9 @@ import lombok.Data;
 public class LoginService {
 
   @Autowired
+  private InputReader inputReader;
+
+  @Autowired
   private LoginDAO loginDAO;
 
   public Login getLogin(final Long id) {
@@ -22,6 +25,16 @@ public class LoginService {
       throw new NoSuchElementException("login " + id + " doesn't exist");
     }
     return loginDAO.findById(id);
+  }
+
+  public Login addLogin (String email, String password) {
+    /*if (loginDAO.existByEmail(email) {
+      throw new EntityExistsException("email " + email + " already exists");
+    }*/
+    Login login = new Login();
+    login.setEmail(email);
+    login.setPassword(password);
+    return loginDAO.addLogin(login);
   }
 
 }
