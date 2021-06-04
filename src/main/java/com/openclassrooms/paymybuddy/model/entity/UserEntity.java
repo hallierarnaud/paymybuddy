@@ -40,7 +40,7 @@ public class UserEntity {
   @Column(name = "birthdate", nullable = false)
   private Date birthdate;
 
-  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.EAGER)
   @JoinColumn(name = "login_id")
   private LoginEntity loginEntity;
 

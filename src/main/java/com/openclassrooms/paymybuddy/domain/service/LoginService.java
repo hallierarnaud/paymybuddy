@@ -15,9 +15,6 @@ import lombok.Data;
 public class LoginService {
 
   @Autowired
-  private InputReader inputReader;
-
-  @Autowired
   private LoginDAO loginDAO;
 
   public Login getLogin(final Long id) {

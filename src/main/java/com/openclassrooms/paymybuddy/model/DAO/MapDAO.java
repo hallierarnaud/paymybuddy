@@ -29,7 +29,7 @@ public class MapDAO {
   }
 
   public UserEntity updateUserEntityWithUser (UserEntity userEntity, User user) {
-    userEntity.setId(user.getId());
+    //userEntity.setId(user.getId());
     userEntity.setLastname(user.getLastname());
     userEntity.setFirstname(user.getFirstname());
     userEntity.setBirthdate(user.getBirthdate());

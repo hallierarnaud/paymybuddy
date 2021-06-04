@@ -2,6 +2,7 @@ package com.openclassrooms.paymybuddy.domain.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Scanner;
 
 import lombok.Data;
@@ -40,6 +41,24 @@ public class InputReader {
       System.out.println("Error reading input. Please enter a valid string password.");
       throw e;
     }
+  }
+
+  public String readLastname() {
+    System.out.println("Please enter your lastname.");
+    String inputLastname = scanner.nextLine();
+    return inputLastname;
+  }
+
+  public String readFirstName() {
+    System.out.println("Please enter your firstname.");
+    String inputFirstname = scanner.nextLine();
+    return inputFirstname;
+  }
+
+  public String readBirthdate() {
+    System.out.println("Please enter your birthdate : AAAA-MM-JJ.");
+    String inputBirthDate = scanner.nextLine();
+    return inputBirthDate;
   }
 
 }

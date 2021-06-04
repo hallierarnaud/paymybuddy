@@ -1,7 +1,7 @@
 package com.openclassrooms.paymybuddy;
 
+import com.openclassrooms.paymybuddy.domain.service.AccountCreationService;
 import com.openclassrooms.paymybuddy.domain.service.InputReader;
-import com.openclassrooms.paymybuddy.domain.service.LoginService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -10,12 +10,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+
 @SpringBootApplication
 @RestController
 public class PaymybuddyApplication implements ApplicationRunner {
 
   @Autowired
-  private LoginService loginService;
+  private AccountCreationService accountCreationService;
 
   @Autowired
   private InputReader inputReader;
@@ -25,8 +27,9 @@ public class PaymybuddyApplication implements ApplicationRunner {
   }
 
   @Override
-  public void run(ApplicationArguments args) {
-    loginService.addLogin(inputReader.readEmail(), inputReader.readPassword());
+  public void run(ApplicationArguments args) throws ParseException {
+    //accountCreationService.createLogin(inputReader.readEmail(), inputReader.readPassword());
+    accountCreationService.createUser(inputReader.readLastname(), inputReader.readFirstName(), inputReader.readBirthdate());
   }
 
 }
