@@ -1,5 +1,6 @@
 package com.openclassrooms.paymybuddy.domain.service;
 
+import com.openclassrooms.paymybuddy.controller.DTO.LoginRequest;
 import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.model.DAO.LoginDAO;
 
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+
+import javax.persistence.EntityExistsException;
 
 import lombok.Data;
 
@@ -24,13 +27,13 @@ public class LoginService {
     return loginDAO.findById(id);
   }
 
-  public Login addLogin (String email, String password) {
-    /*if (loginDAO.existByEmail(email) {
-      throw new EntityExistsException("email " + email + " already exists");
-    }*/
+  public Login addLogin (LoginRequest loginRequest) {
+    if (loginDAO.existsByEmail(loginRequest.getEmail())) {
+      throw new EntityExistsException("email " + loginRequest.getEmail() + " already exists");
+    }
     Login login = new Login();
-    login.setEmail(email);
-    login.setPassword(password);
+    login.setEmail(loginRequest.getEmail());
+    login.setPassword(loginRequest.getPassword());
     return loginDAO.addLogin(login);
   }
 

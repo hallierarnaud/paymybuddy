@@ -34,4 +34,10 @@ public class LoginDAO {
     return login;
   }
 
+  public boolean existById(Long id) {
+    return loginRepository.existsById(id);
+  }
+
+  public boolean existsByEmail(String email) { return loginRepository.existsByEmail(email); }
+
 }

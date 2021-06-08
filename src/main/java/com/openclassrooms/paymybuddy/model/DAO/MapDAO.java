@@ -29,7 +29,7 @@ public class MapDAO {
   }
 
   public UserEntity updateUserEntityWithUser (UserEntity userEntity, User user) {
-    //userEntity.setId(user.getId());
+    userEntity.setId(user.getId());
     userEntity.setLastname(user.getLastname());
     userEntity.setFirstname(user.getFirstname());
     userEntity.setBirthdate(user.getBirthdate());
@@ -44,7 +44,6 @@ public class MapDAO {
   }
 
   public LoginEntity updateLoginEntityWithLogin (LoginEntity loginEntity, Login login) {
-    loginEntity.setId(login.getId());
     loginEntity.setEmail(login.getEmail());
     loginEntity.setPassword(login.getPassword());
     return loginEntity;
@@ -63,6 +62,12 @@ public class MapDAO {
     return internalAccount;
   }
 
+  public InternalAccountEntity updateInternalAccountEntityWithInternalAccount(InternalAccountEntity internalAccountEntity, InternalAccount internalAccount) {
+    internalAccountEntity.setId(internalAccount.getId());
+    internalAccountEntity.setBalance(internalAccount.getBalance());
+    return internalAccountEntity;
+  }
+
   public ExternalTransaction updateExternalTransactionWithExternalTransactionEntity (ExternalTransaction externalTransaction, ExternalTransactionEntity externalTransactionEntity) {
     externalTransaction.setId(externalTransactionEntity.getId());
     externalTransaction.setDescription(externalTransactionEntity.getDescription());
@@ -76,9 +81,20 @@ public class MapDAO {
     return externalAccount;
   }
 
+  public ExternalAccountEntity updateExternalAccountEntityWithExternalAccount(ExternalAccountEntity externalAccountEntity, ExternalAccount externalAccount) {
+    externalAccountEntity.setId(externalAccount.getId());
+    externalAccountEntity.setIban(externalAccount.getIban());
+    return externalAccountEntity;
+  }
+
   public Contact updateContactWithContactEntity (Contact contact, ContactEntity contactEntity) {
     contact.setId(contactEntity.getId());
     return contact;
+  }
+
+  public ContactEntity updateContactEntityWithContact(ContactEntity contactEntity, Contact contact) {
+    contactEntity.setId(contactEntity.getId());
+    return contactEntity;
   }
 
 }
