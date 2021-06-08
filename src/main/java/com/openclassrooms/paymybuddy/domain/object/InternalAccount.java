@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class InternalAccount {
 
-  private long id;
+  private Long id;
   private Double balance;
 
 }

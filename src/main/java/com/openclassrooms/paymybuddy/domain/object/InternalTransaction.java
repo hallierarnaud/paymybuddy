@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class InternalTransaction {
 
-  private long id;
+  private Long id;
   private String description;
   private Double transferredAmount;
 

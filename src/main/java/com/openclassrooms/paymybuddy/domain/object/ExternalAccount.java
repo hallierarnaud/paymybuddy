@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ExternalAccount {
 
-  private long id;
+  private Long id;
   private String iban;
 
 }

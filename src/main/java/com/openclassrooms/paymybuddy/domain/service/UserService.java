@@ -27,12 +27,6 @@ public class UserService {
   @Autowired
   private UserDAO userDAO;
 
-  @Autowired
-  private LoginService loginService;
-
-  @Autowired
-  private InputReader inputReader;
-
   public List<User> getUsers() {
     return StreamSupport.stream(userDAO.findAll().spliterator(),false)
             .collect(Collectors.toList());
@@ -74,15 +68,6 @@ public class UserService {
       throw new NoSuchElementException("user " + id + " doesn't exist");
     }
     userDAO.deleteUserById(id);
-  }
-
-  public User addUserThroughCommandLine (String lastname, String firstname, String birthdate) throws ParseException {
-    User user = new User();
-    user.setLastname(lastname);
-    user.setFirstname(firstname);
-    Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
-    user.setBirthdate(birthDate);
-    return userDAO.addUser(user);
   }
 
 }

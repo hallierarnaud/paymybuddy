@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class Contact {
 
-  private long id;
+  private Long id;
 
 }

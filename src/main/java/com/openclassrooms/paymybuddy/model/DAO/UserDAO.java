@@ -1,9 +1,7 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
 import com.openclassrooms.paymybuddy.domain.object.User;
-import com.openclassrooms.paymybuddy.domain.service.InputReader;
 import com.openclassrooms.paymybuddy.model.entity.UserEntity;
-import com.openclassrooms.paymybuddy.model.repository.LoginRepository;
 import com.openclassrooms.paymybuddy.model.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +19,7 @@ public class UserDAO {
   private UserRepository userRepository;
 
   @Autowired
-  private LoginRepository loginRepository;
-
-  @Autowired
   private MapDAO mapDAO;
-
-  @Autowired
-  private InputReader inputReader;
 
   public User findById(Long id) {
     UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("user " + id + " doesn't exist"));
@@ -56,8 +48,6 @@ public class UserDAO {
   public User addUser(User user) {
     UserEntity userEntity = new UserEntity();
     mapDAO.updateUserEntityWithUser(userEntity, user);
-    String email = inputReader.readEmail();
-    userEntity.setLoginEntity(loginRepository.findByEmail(email));
     userRepository.save(userEntity);
     return user;
   }
