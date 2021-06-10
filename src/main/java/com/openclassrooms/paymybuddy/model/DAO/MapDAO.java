@@ -1,13 +1,11 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
-import com.openclassrooms.paymybuddy.domain.object.Contact;
 import com.openclassrooms.paymybuddy.domain.object.ExternalAccount;
 import com.openclassrooms.paymybuddy.domain.object.ExternalTransaction;
 import com.openclassrooms.paymybuddy.domain.object.InternalAccount;
 import com.openclassrooms.paymybuddy.domain.object.InternalTransaction;
 import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.User;
-import com.openclassrooms.paymybuddy.model.entity.ContactEntity;
 import com.openclassrooms.paymybuddy.model.entity.ExternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.entity.ExternalTransactionEntity;
 import com.openclassrooms.paymybuddy.model.entity.InternalAccountEntity;
@@ -84,16 +82,6 @@ public class MapDAO {
     externalAccountEntity.setId(externalAccount.getId());
     externalAccountEntity.setIban(externalAccount.getIban());
     return externalAccountEntity;
-  }
-
-  public Contact updateContactWithContactEntity (Contact contact, ContactEntity contactEntity) {
-    contact.setId(contactEntity.getId());
-    return contact;
-  }
-
-  public ContactEntity updateContactEntityWithContact(ContactEntity contactEntity, Contact contact) {
-    contactEntity.setId(contactEntity.getId());
-    return contactEntity;
   }
 
 }
