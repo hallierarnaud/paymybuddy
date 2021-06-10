@@ -13,6 +13,10 @@ public class MapService {
     userAccountResponse.setLoginId(userAccount.getLoginId());
     userAccountResponse.setEmail(userAccount.getEmail());
     userAccountResponse.setPassword(userAccount.getPassword());
+    userAccountResponse.setUserId(userAccount.getUserId());
+    userAccountResponse.setLastname(userAccount.getLastname());
+    userAccountResponse.setFirstname(userAccount.getFirstname());
+    userAccountResponse.setBirthdate(userAccount.getBirthdate());
     return userAccountResponse;
   }
 

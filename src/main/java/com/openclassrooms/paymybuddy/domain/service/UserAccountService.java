@@ -23,6 +23,9 @@ public class UserAccountService {
     UserAccount userAccount = new UserAccount();
     userAccount.setEmail(userAccountRequest.getEmail());
     userAccount.setPassword(userAccountRequest.getPassword());
+    userAccount.setLastname(userAccountRequest.getLastname());
+    userAccount.setFirstname(userAccountRequest.getFirstname());
+    userAccount.setBirthdate(userAccountRequest.getBirthdate());
     return userAccountDAO.addUserAccount(userAccount);
   }
 }
