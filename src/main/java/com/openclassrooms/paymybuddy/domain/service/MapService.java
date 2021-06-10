@@ -17,6 +17,10 @@ public class MapService {
     userAccountResponse.setLastname(userAccount.getLastname());
     userAccountResponse.setFirstname(userAccount.getFirstname());
     userAccountResponse.setBirthdate(userAccount.getBirthdate());
+    userAccountResponse.setInternalAccountId(userAccount.getInternalAccountId());
+    userAccountResponse.setBalance(userAccount.getBalance());
+    userAccountResponse.setExternalAccountId(userAccount.getExternalAccountId());
+    userAccountResponse.setIban(userAccount.getIban());
     return userAccountResponse;
   }
 

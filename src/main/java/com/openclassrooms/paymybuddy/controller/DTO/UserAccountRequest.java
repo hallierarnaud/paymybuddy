@@ -14,4 +14,8 @@ public class UserAccountRequest {
   private String firstname;
   private Date birthdate;
 
+  private Double balance;
+
+  private String iban;
+
 }

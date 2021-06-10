@@ -26,6 +26,8 @@ public class UserAccountService {
     userAccount.setLastname(userAccountRequest.getLastname());
     userAccount.setFirstname(userAccountRequest.getFirstname());
     userAccount.setBirthdate(userAccountRequest.getBirthdate());
+    userAccount.setBalance(userAccountRequest.getBalance());
+    userAccount.setIban(userAccountRequest.getIban());
     return userAccountDAO.addUserAccount(userAccount);
   }
 }

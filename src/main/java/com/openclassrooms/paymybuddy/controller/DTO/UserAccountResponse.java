@@ -16,5 +16,10 @@ public class UserAccountResponse {
   private String firstname;
   private Date birthdate;
 
+  private Long internalAccountId;
+  private Double balance;
+
+  private Long externalAccountId;
+  private String iban;
 
 }
