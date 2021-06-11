@@ -7,7 +7,9 @@
         <app-component1></app-component1>
         <app-component1></app-component1>
       </ul>
-      <button class="btn btn-success" [disabled]="!enabledAuthentication">S'authentifier</button>
+      <button class="btn btn-success"
+              [disabled]="!enabledAuthentication"
+              (click)="onAuthenticationEnabled()">S'authentifier</button>
     </div>
   </div>
 </div>

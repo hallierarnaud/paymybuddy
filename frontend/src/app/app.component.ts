@@ -14,4 +14,7 @@ export class AppComponent {
       }, 4000
     );
   }
+  onAuthenticationEnabled() {
+    console.log('Vous pouvez vous authentifier !');
+  }
 }
