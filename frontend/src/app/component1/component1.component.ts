@@ -21,4 +21,13 @@ export class Component1Component implements OnInit {
     return this.dataState;
   }
 
+  // @ts-ignore
+  getColor() {
+    if (this.dataState === 'obligatoire') {
+      return 'red';
+    } else if (this.dataState === 'facultatif') {
+      return 'green';
+    }
+  }
+
 }
