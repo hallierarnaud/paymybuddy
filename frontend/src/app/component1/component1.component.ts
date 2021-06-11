@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Component1Component implements OnInit {
 
+  dataInput: string = 'adresse email';
+  dataState: string = 'obligatoire';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getStatus() {
+    return this.dataState;
   }
 
 }
