@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-component1',
@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Component1Component implements OnInit {
 
-  dataInput: string = 'adresse email';
-  dataState: string = 'obligatoire';
+  // @ts-ignore
+  @Input() dataInput: string;
+  // @ts-ignore
+  @Input() dataState: string;
 
   constructor() { }
 

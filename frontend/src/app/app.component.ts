@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   enabledAuthentication = false;
+
+  email = 'hsimpson@email.fr';
+  lastName = 'Simpson';
+  firstName = 'Homer';
+
   constructor() {
     setTimeout(
       () => {
