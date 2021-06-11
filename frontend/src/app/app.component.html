@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>Données à saisir</h2>
+      <p>Mis à jour: {{ lastUpdate | async | date }}</p>
       <ul class="list-group">
         <app-component1 [dataInput]="email" [dataState]="'obligatoire'"></app-component1>
         <app-component1 [dataInput]="lastName" [dataState]="'obligatoire'"></app-component1>
