@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'paymybuddy application';
+  enabledAuthentication = false;
+  constructor() {
+    setTimeout(
+      () => {
+        this.enabledAuthentication = true;
+      }, 4000
+    );
+  }
 }
