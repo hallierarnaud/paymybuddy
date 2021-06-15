@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public class ContactResponse {
 
-  //private List<Long> relationId;
   private Long userId;
   private List<Long> contactIdList;
 

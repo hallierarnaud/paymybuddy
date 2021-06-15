@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.persistence.EntityExistsException;
+
 import lombok.Data;
 
 @Data
@@ -29,24 +31,21 @@ public class ContactService {
     return contactDAO.findById(id);
   }
 
-  public List<ContactResponse> addContact(ContactRequest contactRequest) {
-    /*if (contactDAO.existsById(contactRequest.getId())) {
-      throw new EntityExistsException("contact " + contactRequest.getId() + " already exists");
+  public ContactResponse addContact(ContactRequest contactRequest) {
+    // TODO : ajouter le renvoi d'un contact déjà existant et corriger la méthode findById
+    /*for (Long contactId : contactRequest.getContactIdList()) {
+      if (contactDAO.findById(contactId)) {
+        throw new EntityExistsException("contact " + contactId + " already exists");
+      }
     }*/
-    List<ContactResponse> contactResponseList = new ArrayList<>();
     Contact contact = new Contact();
     contact.setUserId(contactRequest.getUserId());
     contact.setContactIdList(contactRequest.getContactIdList());
     contactDAO.addContact(contact);
-    List<Long> relationIdList = contact.getRelationId();
-    for (Long relationId : relationIdList) {
-      Contact saveContact = contactDAO.findById(relationId);
-      ContactResponse contactResponse = new ContactResponse();
-      contactResponse.setUserId(saveContact.getUserId());
-      contactResponse.setContactIdList(saveContact.getContactIdList());
-      contactResponseList.add(contactResponse);
-    }
-    return contactResponseList;
+    ContactResponse contactResponse = new ContactResponse();
+    contactResponse.setUserId(contactRequest.getUserId());
+    contactResponse.setContactIdList(contactRequest.getContactIdList());
+    return contactResponse;
   }
 
 }
