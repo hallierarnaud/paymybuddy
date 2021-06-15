@@ -24,7 +24,7 @@ public class InternalTransactionEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private Long id;
 
   @Column(name = "description", length = 200)
   private String description;

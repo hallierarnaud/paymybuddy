@@ -24,7 +24,7 @@ public class InternalAccountEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private Long id;
 
   @Column(name = "balance", nullable = false)
   private Double balance;

@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,7 +28,7 @@ public class UserEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private Long id;
 
   @Column(name = "lastname", nullable = false, length = 50)
   private String lastname;
@@ -43,9 +42,6 @@ public class UserEntity {
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
   @JoinColumn(name = "login_id")
   private LoginEntity loginEntity;
-
-  @OneToOne(mappedBy = "userEntity")
-  private ContactEntity contactEntity;
 
   @OneToMany(mappedBy = "userEntityAsContact")
   private List<ContactEntity> contactEntities;
