@@ -1,36 +1,33 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/observable/interval';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  enabledAuthentication = false;
+export class AppComponent implements OnInit, OnDestroy {
 
-  lastUpdate: Promise<Date> = new Promise(
-    (resolve, reject) => {
-      const date = new Date();
-      setTimeout(
-        () => {
-          resolve(date);
-        }, 2000
-      );
-    }
-  );
+  // @ts-ignore
+  secondes: number;
+    // @ts-ignore
+  counterSubscription: Subscription;
 
-  email = 'hsimpson@email.fr';
-  lastName = 'Simpson';
-  firstName = 'Homer';
+  constructor() {}
 
-  constructor() {
-    setTimeout(
-      () => {
-        this.enabledAuthentication = true;
-      }, 4000
+  ngOnInit() {
+    const counter = Observable.interval(1000);
+    this.counterSubscription = counter.subscribe(
+      (value: number) => {
+        this.secondes = value;
+      }
     );
   }
-  onAuthenticationEnabled() {
-    console.log('Vous pouvez vous authentifier !');
+
+  ngOnDestroy() {
+    this.counterSubscription.unsubscribe();
   }
+
 }
