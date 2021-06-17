@@ -1,24 +1,30 @@
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
-import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
-import {UserService} from "./user.service";
+import {CanActivate, Router} from "@angular/router";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import {Observable} from "rxjs";
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuardService implements CanActivate {
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private router: Router) { }
+
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return new Promise(
+      (resolve, reject) => {
+        firebase.auth().onAuthStateChanged(
+          (user) => {
+            if(user) {
+              resolve(true);
+            } else {
+              this.router.navigate(['signin']);
+              resolve(false);
+            }
+          }
+        );
+      }
+    );
   }
 
-  canActivate(route: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot
-              ): Observable<boolean> | Promise<boolean> | boolean {
-
-  if(this.userService.isAuth) {
-      return true;
-    } else {
-    this.router.navigate(['/login']);
-      return false;
-    }
-
-  }
 }

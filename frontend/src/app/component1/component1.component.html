@@ -1,8 +1,0 @@
-<li [ngClass]="{'list-group-item': true,
-'list-group-item-success': dataState === 'facultatif',
-'list-group-item-danger': dataState === 'obligatoire'}">
-  <div style="width:20px;height:20px;background-color:red;"
-       *ngIf="dataState === 'obligatoire'"></div>
-  <h4 [ngStyle]="{color: getColor()}">Données à saisir pour créer un compte : {{ dataInput }} -- Données obligatoire : {{ getStatus() }}</h4>
-  <input type="text" class="form-control" [(ngModel)]="dataInput">
-</li>
