@@ -10,9 +10,7 @@ import {AuthService} from "../services/auth.service";
 })
 export class SignupComponent implements OnInit {
 
-  // @ts-ignore
   signUpForm: FormGroup;
-  // @ts-ignore
   errorMessage: string;
 
   constructor(private formBuilder: FormBuilder,
@@ -29,7 +27,8 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
     });
   }
-  onSubmit() {
+
+  /*onSubmit() {
     // @ts-ignore
     const email = this.signUpForm.get('email').value;
     // @ts-ignore
@@ -42,6 +41,16 @@ export class SignupComponent implements OnInit {
         this.errorMessage = error;
       }
     );
+  }*/
+
+  // ajout de la méthode pour récupérer les useraccounts
+  checkUserAccount() {
+    this.authService.getUserAccount("hsimpson@email.fr").subscribe(userAccount => {
+        console.log('userAccount: ', userAccount);
+      }, error => {
+        console.log('error', error);
+      }
+    )
   }
 
 }

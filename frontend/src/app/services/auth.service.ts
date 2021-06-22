@@ -1,46 +1,20 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
 import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+// ajout de l'import pour récupérer les userAccounts
+import {UserAccount} from "../data/userAccount";
 
 @Injectable()
 export class AuthService {
 
-  constructor() {
+  private createAccountUrl: string;
+
+  constructor(private http: HttpClient) {
+    this.createAccountUrl = 'http://localhost:9001/useraccounts';
   }
 
-  createNewUser(email: string, password: string) {
-    return new Promise<void>(
-      (resolve, reject) => {
-        firebase.auth().createUserWithEmailAndPassword(email, password).then(
-          () => {
-            resolve();
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-      }
-    );
-  }
-
-  signInUser(email: string, password: string) {
-    return new Promise<void>(
-      (resolve, reject) => {
-        firebase.auth().signInWithEmailAndPassword(email, password).then(
-          () => {
-            resolve();
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-      }
-    );
-  }
-
-  signOutUser() {
-    firebase.auth().signOut();
+  // ajout de la méthode pour récupérer les userAccounts
+  getUserAccount(email: string) {
+    return this.http.get<UserAccount>('http://localhost:9001/useraccounts/'+email);
   }
 
 }
