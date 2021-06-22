@@ -1,5 +1,7 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
+import com.openclassrooms.paymybuddy.domain.object.Login;
+import com.openclassrooms.paymybuddy.domain.object.User;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.model.entity.ExternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.entity.InternalAccountEntity;
@@ -13,6 +15,8 @@ import com.openclassrooms.paymybuddy.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.NoSuchElementException;
 
 @Repository
 public class UserAccountDAO {
@@ -28,6 +32,16 @@ public class UserAccountDAO {
 
   @Autowired
   private ExternalAccountRepository externalAccountRepository;
+
+  @Autowired
+  MapDAO mapDAO;
+
+  public UserAccount findByEmail(String email) {
+    LoginEntity loginEntity = loginRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("email " + email + " doesn't exist"));
+    UserAccount userAccount = new UserAccount();
+    mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
+    return userAccount;
+  }
 
   @Transactional
   public UserAccount addUserAccount (UserAccount userAccount) {

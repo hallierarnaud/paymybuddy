@@ -1,11 +1,14 @@
 package com.openclassrooms.paymybuddy.domain.service;
 
 import com.openclassrooms.paymybuddy.controller.DTO.UserAccountRequest;
+import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.model.DAO.UserAccountDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.NoSuchElementException;
 
 import lombok.Data;
 
@@ -15,6 +18,13 @@ public class UserAccountService {
 
   @Autowired
   private UserAccountDAO userAccountDAO;
+
+  public UserAccount getUserAccount(final String email) {
+    if (userAccountDAO.findByEmail(email) == null) {
+      throw new NoSuchElementException("email " + email + " doesn't exist");
+    }
+    return userAccountDAO.findByEmail(email);
+  }
 
   public UserAccount addUserAccount (UserAccountRequest userAccountRequest) {
     /*if (userAccountDAO.existsByEmail(userAccountRequest.getEmail())) {

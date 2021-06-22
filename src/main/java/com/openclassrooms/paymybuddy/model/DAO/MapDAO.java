@@ -6,6 +6,7 @@ import com.openclassrooms.paymybuddy.domain.object.InternalAccount;
 import com.openclassrooms.paymybuddy.domain.object.InternalTransaction;
 import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.User;
+import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.model.entity.ExternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.entity.ExternalTransactionEntity;
 import com.openclassrooms.paymybuddy.model.entity.InternalAccountEntity;
@@ -82,6 +83,12 @@ public class MapDAO {
     externalAccountEntity.setId(externalAccount.getId());
     externalAccountEntity.setIban(externalAccount.getIban());
     return externalAccountEntity;
+  }
+
+  public UserAccount updateUserAccountWithLoginEntity (UserAccount userAccount, LoginEntity loginEntity) {
+    userAccount.setEmail(loginEntity.getEmail());
+    userAccount.setPassword(loginEntity.getPassword());
+    return userAccount;
   }
 
 }
