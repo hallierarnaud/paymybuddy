@@ -10,9 +10,7 @@ import {Router} from "@angular/router";
 })
 export class SigninComponent implements OnInit {
 
-// @ts-ignore
   signInForm: FormGroup;
-  // @ts-ignore
   errorMessage: string;
 
   constructor(private formBuilder: FormBuilder,
@@ -29,7 +27,8 @@ export class SigninComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
     });
   }
-  onSubmit() {
+
+  /*onSubmit() {
     // @ts-ignore
     const email = this.signInForm.get('email').value;
     // @ts-ignore
@@ -42,6 +41,6 @@ export class SigninComponent implements OnInit {
         this.errorMessage = error;
       }
     );
-  }
+  }*/
 
 }
