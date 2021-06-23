@@ -6,7 +6,7 @@ export class UserAccount {
   public email: string;
   public password: string;
 
-  /*public userId: number;
+  public userId: number;
   public lastname: string;
   public firstname: string;
   public birthdate: string;
@@ -15,6 +15,6 @@ export class UserAccount {
   public balance: number;
 
   public externalAccountId: number;
-  public iban: string;*/
+  public iban: string;
 
 }

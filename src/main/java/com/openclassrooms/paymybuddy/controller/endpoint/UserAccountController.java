@@ -3,6 +3,7 @@ package com.openclassrooms.paymybuddy.controller.endpoint;
 import com.openclassrooms.paymybuddy.controller.DTO.UserAccountRequest;
 import com.openclassrooms.paymybuddy.controller.DTO.UserAccountResponse;
 import com.openclassrooms.paymybuddy.domain.object.Login;
+import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.domain.service.MapService;
 import com.openclassrooms.paymybuddy.domain.service.UserAccountService;
 
@@ -48,11 +49,11 @@ public class UserAccountController {
   }
 
   @PostMapping("/useraccounts")
-  public UserAccountResponse addUserAccount(@RequestBody UserAccountRequest userAccountRequest) {
+  public UserAccount addUserAccount(@RequestBody UserAccount userAccount) {
     try {
-      return mapService.convertUserAccountToUserAccountResponse(userAccountService.addUserAccount(userAccountRequest));
+      return userAccountService.addUserAccount(userAccount);
     } catch (EntityExistsException e) {
-      throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "email " + userAccountRequest.getEmail() + " already exists");
+      throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "email " + userAccount.getEmail() + " already exists");
     }
   }
 

@@ -34,18 +34,18 @@ public class UserAccountService {
             .collect(Collectors.toList());
   }
 
-  public UserAccount addUserAccount (UserAccountRequest userAccountRequest) {
+  public UserAccount addUserAccount (UserAccount userAccount) {
     /*if (userAccountDAO.existsByEmail(userAccountRequest.getEmail())) {
       throw new EntityExistsException("email " + userAccountRequest.getEmail() + " already exists");
     }*/
-    UserAccount userAccount = new UserAccount();
+    /*UserAccount userAccount = new UserAccount();
     userAccount.setEmail(userAccountRequest.getEmail());
     userAccount.setPassword(userAccountRequest.getPassword());
     userAccount.setLastname(userAccountRequest.getLastname());
     userAccount.setFirstname(userAccountRequest.getFirstname());
     userAccount.setBirthdate(userAccountRequest.getBirthdate());
     userAccount.setBalance(userAccountRequest.getBalance());
-    userAccount.setIban(userAccountRequest.getIban());
+    userAccount.setIban(userAccountRequest.getIban());*/
     return userAccountDAO.addUserAccount(userAccount);
   }
 }

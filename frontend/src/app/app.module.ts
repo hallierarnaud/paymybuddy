@@ -17,7 +17,7 @@ import { UseraccountFormComponent } from './useraccount-form/useraccount-form.co
 
 const appRoutes: Routes = [
   { path: 'userAccounts', component: UseraccountListComponent},
-  { path: 'addLogin', component: UseraccountFormComponent},
+  { path: 'addUserAccount', component: UseraccountFormComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
   { path: 'not-found', component: FourOhFourComponent },

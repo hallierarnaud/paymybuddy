@@ -29,7 +29,7 @@ export class AuthService {
 
   // ajout de la méthode pour sauvegarder un useraccount
   public saveUserAccount(userAccount: UserAccount) {
-    return this.http.post<UserAccount>('http://localhost:9001/logins', userAccount);
+    return this.http.post<UserAccount>('http://localhost:9001/useraccounts', userAccount);
   }
 
 }
