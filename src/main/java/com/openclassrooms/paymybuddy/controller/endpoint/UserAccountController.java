@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
 
@@ -32,12 +34,17 @@ public class UserAccountController {
   private MapService mapService;
 
   @GetMapping("/useraccounts/{email}")
-  public UserAccountResponse getLUserAccountByEmail(@PathVariable("email") String email) {
+  public UserAccountResponse getUserAccountByEmail(@PathVariable("email") String email) {
     try {
       return mapService.convertUserAccountToUserAccountResponse(userAccountService.getUserAccount(email));
     } catch (NoSuchElementException e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "email " + email + " doesn't exist");
     }
+  }
+
+  @GetMapping("/useraccounts")
+  public List<UserAccountResponse> getUserAccounts() {
+    return userAccountService.getUserAccounts().stream().map(p -> mapService.convertUserAccountToUserAccountResponse(p)).collect(Collectors.toList());
   }
 
   @PostMapping("/useraccounts")

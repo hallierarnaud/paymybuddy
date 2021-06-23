@@ -86,6 +86,7 @@ public class MapDAO {
   }
 
   public UserAccount updateUserAccountWithLoginEntity (UserAccount userAccount, LoginEntity loginEntity) {
+    userAccount.setLoginId(loginEntity.getId());
     userAccount.setEmail(loginEntity.getEmail());
     userAccount.setPassword(loginEntity.getPassword());
     return userAccount;

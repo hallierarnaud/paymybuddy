@@ -1,20 +1,35 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-// ajout de l'import pour récupérer les userAccounts
+// Y: ajout de l'import pour récupérer les userAccounts
 import {UserAccount} from "../data/userAccount";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class AuthService {
 
   private createAccountUrl: string;
 
+  // ajout d'une url
+  private userAccountsUrl: string;
+
   constructor(private http: HttpClient) {
-    this.createAccountUrl = 'http://localhost:9001/useraccounts';
+    this.createAccountUrl = 'http://localhost:9001/useraccounts/';
+    this.userAccountsUrl = 'http://localhost:9001/useraccounts';
   }
 
-  // ajout de la méthode pour récupérer les userAccounts
-  getUserAccount(email: string) {
-    return this.http.get<UserAccount>('http://localhost:9001/useraccounts/'+email);
+  // Y: ajout de la méthode pour récupérer un userAccount avec son adresse mail
+  public getUserAccount(email: string) {
+    return this.http.get<UserAccount>(this.createAccountUrl+email);
+  }
+
+  // ajout de la méthode pour récupérer tous les userAccounts
+  public getUserAccounts(): Observable<UserAccount[]> {
+    return this.http.get<UserAccount[]>(this.userAccountsUrl);
+  }
+
+  // ajout de la méthode pour sauvegarder un useraccount
+  public saveUserAccount(userAccount: UserAccount) {
+    return this.http.post<UserAccount>('http://localhost:9001/logins', userAccount);
   }
 
 }

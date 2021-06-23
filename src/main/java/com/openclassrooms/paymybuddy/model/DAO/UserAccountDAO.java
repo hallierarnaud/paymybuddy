@@ -16,7 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Repository
 public class UserAccountDAO {
@@ -41,6 +44,16 @@ public class UserAccountDAO {
     UserAccount userAccount = new UserAccount();
     mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
     return userAccount;
+  }
+
+  public List<UserAccount> findAll() {
+    List<LoginEntity> loginEntities =  StreamSupport.stream(loginRepository.findAll().spliterator(),false)
+            .collect(Collectors.toList());
+    return loginEntities.stream().map((loginEntity) -> {
+      UserAccount userAccount = new UserAccount();
+      mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
+      return userAccount;
+    }).collect(Collectors.toList());
   }
 
   @Transactional

@@ -8,7 +8,10 @@ import com.openclassrooms.paymybuddy.model.DAO.UserAccountDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import lombok.Data;
 
@@ -24,6 +27,11 @@ public class UserAccountService {
       throw new NoSuchElementException("email " + email + " doesn't exist");
     }
     return userAccountDAO.findByEmail(email);
+  }
+
+  public List<UserAccount> getUserAccounts() {
+    return StreamSupport.stream(userAccountDAO.findAll().spliterator(),false)
+            .collect(Collectors.toList());
   }
 
   public UserAccount addUserAccount (UserAccountRequest userAccountRequest) {

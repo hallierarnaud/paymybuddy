@@ -12,8 +12,12 @@ import { SignupComponent } from './signup/signup.component';
 import { HeaderComponent } from "./header/header.component";
 import { AuthService } from "./services/auth.service";
 import { AuthGuardService } from "./services/auth-guard.service";
+import { UseraccountListComponent } from './useraccount-list/useraccount-list.component';
+import { UseraccountFormComponent } from './useraccount-form/useraccount-form.component';
 
 const appRoutes: Routes = [
+  { path: 'userAccounts', component: UseraccountListComponent},
+  { path: 'addLogin', component: UseraccountFormComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
   { path: 'not-found', component: FourOhFourComponent },
@@ -27,7 +31,9 @@ const appRoutes: Routes = [
     FourOhFourComponent,
     SigninComponent,
     SignupComponent,
-    HeaderComponent
+    HeaderComponent,
+    UseraccountListComponent,
+    UseraccountFormComponent
   ],
   imports: [
     BrowserModule,
