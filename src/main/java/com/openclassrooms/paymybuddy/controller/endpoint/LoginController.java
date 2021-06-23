@@ -6,6 +6,7 @@ import com.openclassrooms.paymybuddy.domain.service.LoginService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import java.util.NoSuchElementException;
 import javax.persistence.EntityExistsException;
 
 @RestController
+@CrossOrigin(origins="*")
 public class LoginController {
 
   @Autowired
@@ -33,11 +35,11 @@ public class LoginController {
   }
 
   @PostMapping("/logins")
-  public Login addLogin(@RequestBody LoginRequest loginRequest) {
+  public Login addLogin(@RequestBody Login login) {
     try {
-      return loginService.addLogin(loginRequest);
+      return loginService.addLogin(login);
     } catch (EntityExistsException e) {
-      throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "email " + loginRequest.getEmail() + " already exists");
+      throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "email " + login.getEmail() + " already exists");
     }
   }
 

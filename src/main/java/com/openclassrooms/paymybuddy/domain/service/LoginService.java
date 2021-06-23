@@ -27,13 +27,10 @@ public class LoginService {
     return loginDAO.findById(id);
   }
 
-  public Login addLogin (LoginRequest loginRequest) {
-    if (loginDAO.existsByEmail(loginRequest.getEmail())) {
-      throw new EntityExistsException("email " + loginRequest.getEmail() + " already exists");
+  public Login addLogin (Login login) {
+    if (loginDAO.existsByEmail(login.getEmail())) {
+      throw new EntityExistsException("email " + login.getEmail() + " already exists");
     }
-    Login login = new Login();
-    login.setEmail(loginRequest.getEmail());
-    login.setPassword(loginRequest.getPassword());
     return loginDAO.addLogin(login);
   }
 
