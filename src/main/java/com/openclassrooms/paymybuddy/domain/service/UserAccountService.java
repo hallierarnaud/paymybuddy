@@ -1,7 +1,5 @@
 package com.openclassrooms.paymybuddy.domain.service;
 
-import com.openclassrooms.paymybuddy.controller.DTO.UserAccountRequest;
-import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.model.DAO.UserAccountDAO;
 
@@ -22,11 +20,11 @@ public class UserAccountService {
   @Autowired
   private UserAccountDAO userAccountDAO;
 
-  public UserAccount getUserAccount(final String email) {
-    if (userAccountDAO.findByEmail(email) == null) {
-      throw new NoSuchElementException("email " + email + " doesn't exist");
+  public UserAccount getUserAccount(final String email, final String password) {
+    if (userAccountDAO.findByEmailAndPassword(email, password) == null) {
+      throw new NoSuchElementException("email " + email + " doesn't exist or password is false");
     }
-    return userAccountDAO.findByEmail(email);
+    return userAccountDAO.findByEmailAndPassword(email, password);
   }
 
   public List<UserAccount> getUserAccounts() {

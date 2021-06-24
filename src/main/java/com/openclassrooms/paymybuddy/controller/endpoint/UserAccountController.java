@@ -1,8 +1,6 @@
 package com.openclassrooms.paymybuddy.controller.endpoint;
 
-import com.openclassrooms.paymybuddy.controller.DTO.UserAccountRequest;
 import com.openclassrooms.paymybuddy.controller.DTO.UserAccountResponse;
-import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.domain.service.MapService;
 import com.openclassrooms.paymybuddy.domain.service.UserAccountService;
@@ -34,12 +32,12 @@ public class UserAccountController {
   @Autowired
   private MapService mapService;
 
-  @GetMapping("/useraccounts/{email}")
-  public UserAccountResponse getUserAccountByEmail(@PathVariable("email") String email) {
+  @GetMapping("/useraccounts/{email}/{password}")
+  public UserAccountResponse getUserAccountByEmailAndPassword(@PathVariable("email") String email, @PathVariable("password") String password) {
     try {
-      return mapService.convertUserAccountToUserAccountResponse(userAccountService.getUserAccount(email));
+      return mapService.convertUserAccountToUserAccountResponse(userAccountService.getUserAccount(email, password));
     } catch (NoSuchElementException e) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "email " + email + " doesn't exist");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "email " + email + " doesn't exist or password is false");
     }
   }
 

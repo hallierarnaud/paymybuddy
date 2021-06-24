@@ -34,6 +34,11 @@ export class AuthService {
     return this.http.get<UserAccount>(this.createAccountUrl+email);
   }
 
+  // ajout de la méthode pour récupérer un userAccount avec son email et password
+  public checkUserAccount(email: string, password: string) {
+    return this.http.get<UserAccount>(this.createAccountUrl+email+'/'+password);
+  }
+
   // ajout de la méthode pour récupérer tous les userAccounts
   public getUserAccounts(): Observable<UserAccount[]> {
     return this.http.get<UserAccount[]>(this.userAccountsUrl);

@@ -12,6 +12,6 @@ public interface LoginRepository extends JpaRepository<LoginEntity, Long> {
 
   Boolean existsByEmail(String email);
 
-  Optional<LoginEntity> findByEmail (String email);
+  Optional<LoginEntity> findByEmailAndPassword (String email, String password);
 
 }

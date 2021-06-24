@@ -1,7 +1,5 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
-import com.openclassrooms.paymybuddy.domain.object.Login;
-import com.openclassrooms.paymybuddy.domain.object.User;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.model.entity.ExternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.entity.InternalAccountEntity;
@@ -39,8 +37,8 @@ public class UserAccountDAO {
   @Autowired
   MapDAO mapDAO;
 
-  public UserAccount findByEmail(String email) {
-    LoginEntity loginEntity = loginRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("email " + email + " doesn't exist"));
+  public UserAccount findByEmailAndPassword(String email, String password) {
+    LoginEntity loginEntity = loginRepository.findByEmailAndPassword(email, password).orElseThrow(() -> new NoSuchElementException("email " + email + " doesn't exist or password is false"));
     UserAccount userAccount = new UserAccount();
     mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
     return userAccount;

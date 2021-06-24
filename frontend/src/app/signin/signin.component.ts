@@ -64,4 +64,20 @@ export class SigninComponent implements OnInit {
     );
   }*/
 
+  // ajout de la méthode pour récupérer un useraccount par son email et password
+  checkUserAccount() {
+    // @ts-ignore
+    const email = this.signInForm.get('email').value;
+    // @ts-ignore
+    const password = this.signInForm.get('password').value;
+    this.authService.checkUserAccount(email,password).subscribe(userAccount => {
+        console.log('userAccount: ', userAccount);
+      this.authService.signIn();
+      this.authStatus = this.authService.isAuth;
+      }, error => {
+        console.log('error', error);
+      }
+    )
+  }
+
 }

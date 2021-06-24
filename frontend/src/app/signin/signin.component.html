@@ -23,6 +23,10 @@
       <button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()"
               type="submit"
               >Disconnect</button>
+      <!-- ajout d'un bouton pour récupérer les useraccounts -->
+      <button class="btn btn-primary"
+              type="submit" (click)="checkUserAccount()"
+      >Check userAccount</button>
     </form>
     <p class="text-danger">{{ errorMessage }}</p>
   </div>
