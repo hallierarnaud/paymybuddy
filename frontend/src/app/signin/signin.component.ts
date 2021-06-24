@@ -10,6 +10,10 @@ import {Router} from "@angular/router";
 })
 export class SigninComponent implements OnInit {
 
+  // ajout d'une variable pour le statut d'authentification
+  authStatus: boolean;
+
+  // formulaire réactif
   signInForm: FormGroup;
   errorMessage: string;
 
@@ -18,9 +22,25 @@ export class SigninComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    // mise à jour de la variable d'authentification
+    this.authStatus = this.authService.isAuth;
+    // formulaire réactif
     this.initForm();
   }
 
+  // ajout du système d'authentification et de desauthentification
+  onSignIn() {
+    this.authService.signIn();
+    this.authStatus = this.authService.isAuth;
+    this.router.navigate(['userAccounts']);
+  }
+
+  onSignOut() {
+    this.authService.signOut();
+    this.authStatus = this.authService.isAuth;
+  }
+
+  // formulaire réactif
   initForm() {
     this.signInForm = this.formBuilder.group( {
       email: ['', [Validators.required, Validators.email]],
@@ -28,6 +48,7 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  // formulaire réactif
   /*onSubmit() {
     // @ts-ignore
     const email = this.signInForm.get('email').value;

@@ -16,9 +16,13 @@
                class="form-control"
                formControlName="password">
       </div>
-      <button class="btn btn-primary"
+      <!-- ajout des boutons d'authenfication et de desauthentification -->
+      <button class="btn btn-success" *ngIf="!authStatus" (click)="onSignIn()"
               type="submit"
               [disabled]="signInForm.invalid">Connect</button>
+      <button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()"
+              type="submit"
+              >Disconnect</button>
     </form>
     <p class="text-danger">{{ errorMessage }}</p>
   </div>

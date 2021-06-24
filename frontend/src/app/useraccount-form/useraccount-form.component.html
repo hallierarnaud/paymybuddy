@@ -1,6 +1,6 @@
 <div class="card my-5">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #userAccountForm="ngForm">
+    <form (ngSubmit)="onSubmit(userAccountForm)" #userAccountForm="ngForm">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" [(ngModel)]="userAccount.email"

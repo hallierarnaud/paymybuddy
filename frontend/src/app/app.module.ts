@@ -16,12 +16,12 @@ import { UseraccountListComponent } from './useraccount-list/useraccount-list.co
 import { UseraccountFormComponent } from './useraccount-form/useraccount-form.component';
 
 const appRoutes: Routes = [
-  { path: 'userAccounts', component: UseraccountListComponent},
+  { path: 'userAccounts', canActivate:[AuthGuardService], component: UseraccountListComponent},
   { path: 'addUserAccount', component: UseraccountFormComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
+  { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'not-found', component: FourOhFourComponent },
-  { path: '', redirectTo: '/not-found', pathMatch: 'full' },
   { path: '**', redirectTo: '/not-found' }
 ]
 

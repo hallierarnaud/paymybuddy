@@ -7,6 +7,18 @@ import {Observable} from "rxjs";
 @Injectable()
 export class AuthService {
 
+  // ajout du système d'authentification et de desauthentification
+  isAuth = false;
+
+  public signIn() {
+    this.isAuth = true;
+  }
+
+  public signOut() {
+    this.isAuth = false;
+  }
+
+
   private createAccountUrl: string;
 
   // ajout d'une url

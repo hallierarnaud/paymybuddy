@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserAccount} from "../data/userAccount";
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-useraccount-form',
@@ -19,7 +20,7 @@ export class UseraccountFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
     this.authService.saveUserAccount(this.userAccount).subscribe(result => this.gotoUserAccountList());
   }
 
