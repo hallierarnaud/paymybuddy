@@ -31,4 +31,33 @@
     <p class="text-danger">{{ errorMessage }}</p>
   </div>
 </div>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onCheckLogin(loginForm)" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="emailbis">Email</label>
+        <input type="text" [(ngModel)]="login.email"
+               class="form-control"
+               id="emailbis"
+               name="emailbis"
+               placeholder="Enter your email"
+               required #emailbis="ngModel">
+        <div [hidden]="!emailbis.pristine" class="alert alert-danger">Email is required</div>
+      </div>
+      <div class="form-group">
+        <label for="passwordbis">Password</label>
+        <input type="text" [(ngModel)]="login.password"
+               class="form-control"
+               id="passwordbis"
+               name="passwordbis"
+               placeholder="Enter your password"
+               required #passwordbis="ngModel">
+        <div [hidden]="!passwordbis.pristine" class="alert alert-danger">Password is required</div>
+      </div>
+      <!-- ajout d'un bouton pour checker l'existence d'un login -->
+      <button type="submit" [disabled]="!loginForm.form.valid"
+              class="btn btn-info">Submit Login</button>
+    </form>
+  </div>
+</div>
 

@@ -14,12 +14,14 @@ import { AuthService } from "./services/auth.service";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { UseraccountListComponent } from './useraccount-list/useraccount-list.component';
 import { UseraccountFormComponent } from './useraccount-form/useraccount-form.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'userAccounts', canActivate:[AuthGuardService], component: UseraccountListComponent},
   { path: 'addUserAccount', component: UseraccountFormComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
+  { path: 'dashBoard', canActivate:[AuthGuardService], component: DashboardComponent},
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: '/not-found' }
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     SignupComponent,
     HeaderComponent,
     UseraccountListComponent,
-    UseraccountFormComponent
+    UseraccountFormComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

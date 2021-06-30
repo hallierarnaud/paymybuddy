@@ -89,6 +89,14 @@ public class MapDAO {
     userAccount.setLoginId(loginEntity.getId());
     userAccount.setEmail(loginEntity.getEmail());
     userAccount.setPassword(loginEntity.getPassword());
+    userAccount.setUserId(loginEntity.getUserEntity().getId());
+    userAccount.setLastname(loginEntity.getUserEntity().getLastname());
+    userAccount.setFirstname(loginEntity.getUserEntity().getFirstname());
+    userAccount.setBirthdate(loginEntity.getUserEntity().getBirthdate());
+    userAccount.setInternalAccountId(loginEntity.getUserEntity().getInternalAccountEntity().getId());
+    userAccount.setBalance(loginEntity.getUserEntity().getInternalAccountEntity().getBalance());
+    userAccount.setExternalAccountId(loginEntity.getUserEntity().getExternalAccountEntity().getId());
+    userAccount.setIban(loginEntity.getUserEntity().getExternalAccountEntity().getIban());
     return userAccount;
   }
 

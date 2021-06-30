@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {Login} from "../data/login";
+import {UserAccount} from "../data/userAccount";
 
 @Component({
   selector: 'app-signin',
@@ -17,9 +19,16 @@ export class SigninComponent implements OnInit {
   signInForm: FormGroup;
   errorMessage: string;
 
+  // ajout de la variable pour checker l'existence du login
+  login: Login;
+  email: string;
+
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router) {
+    // création du login à checker
+    this.login = new Login();
+  }
 
   ngOnInit(): void {
     // mise à jour de la variable d'authentification
@@ -78,6 +87,22 @@ export class SigninComponent implements OnInit {
         console.log('error', error);
       }
     )
+  }
+
+  // ajout d'une méthode pour checker l'existence d'un login dans la bdd
+  onCheckLogin(form: NgForm) {
+    this.authService.checkLogin(this.login).subscribe(userAccount => {
+        this.email = userAccount.email;
+        console.log('email: ', this.email);
+        this.authService.signIn();
+        this.authStatus = this.authService.isAuth;
+        console.log('isAuth: ', this.authStatus);
+        this.router.navigate(['/dashBoard'], {state: {data: this.email}});
+      }
+    )
+    /*this.authService.getUserAccountByLogin(this.login).subscribe(userAccount => {
+      console.log('userAccount: ', userAccount);
+    })*/
   }
 
 }

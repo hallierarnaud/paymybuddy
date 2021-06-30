@@ -1,6 +1,7 @@
 package com.openclassrooms.paymybuddy.controller.endpoint;
 
 import com.openclassrooms.paymybuddy.controller.DTO.UserAccountResponse;
+import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.domain.service.MapService;
 import com.openclassrooms.paymybuddy.domain.service.UserAccountService;
@@ -44,6 +45,26 @@ public class UserAccountController {
   @GetMapping("/useraccounts")
   public List<UserAccountResponse> getUserAccounts() {
     return userAccountService.getUserAccounts().stream().map(p -> mapService.convertUserAccountToUserAccountResponse(p)).collect(Collectors.toList());
+  }
+
+  // Ajout de la méthode pour checker l'existence du login
+  @PostMapping("/checkuseraccounts")
+  public UserAccountResponse checkUserAccount(@RequestBody Login login) {
+    try {
+      return mapService.convertUserAccountToUserAccountResponse(userAccountService.checkUserAccount(login));
+    } catch (NoSuchElementException e) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "email " + login.getEmail() + " doesn't exist or password is false");
+    }
+  }
+
+  // ajout d'une méthode pour récupérer le userAccount correspondant au login
+  @GetMapping("/getuseraccounts/{email}")
+  public UserAccountResponse getUserAccountByLogin(@PathVariable("email") String email) {
+    try {
+      return mapService.convertUserAccountToUserAccountResponse(userAccountService.getUserAccountByLogin(email));
+    } catch (NoSuchElementException e) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "email " + email + " doesn't exist or password is false");
+    }
   }
 
   @PostMapping("/useraccounts")

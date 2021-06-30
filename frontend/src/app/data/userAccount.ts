@@ -9,7 +9,7 @@ export class UserAccount {
   public userId: number;
   public lastname: string;
   public firstname: string;
-  public birthdate: string;
+  public birthdate: string | null;
 
   public internalAccountId: number;
   public balance: number;

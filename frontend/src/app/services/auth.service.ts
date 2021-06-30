@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 // Y: ajout de l'import pour récupérer les userAccounts
 import {UserAccount} from "../data/userAccount";
 import {Observable} from "rxjs";
+import {Login} from "../data/login";
 
 @Injectable()
 export class AuthService {
@@ -47,6 +48,16 @@ export class AuthService {
   // ajout de la méthode pour sauvegarder un useraccount
   public saveUserAccount(userAccount: UserAccount) {
     return this.http.post<UserAccount>('http://localhost:9001/useraccounts', userAccount);
+  }
+
+  // ajout d'une méthode d'authentification via un post
+  public checkLogin(login: Login) {
+    return this.http.post<Login>('http://localhost:9001/checkuseraccounts', login);
+  }
+
+  // ajout d'une méthode pour récupérer le userAccount correspondant au login
+  public getUserAccountByLogin(email: string) {
+    return this.http.get<UserAccount>('http://localhost:9001/getuseraccounts/'+email);
   }
 
 }

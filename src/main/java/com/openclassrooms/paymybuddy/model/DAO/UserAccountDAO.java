@@ -1,5 +1,6 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
+import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.model.entity.ExternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.entity.InternalAccountEntity;
@@ -52,6 +53,22 @@ public class UserAccountDAO {
       mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
       return userAccount;
     }).collect(Collectors.toList());
+  }
+
+  // Ajout de la méthode pour checker l'existence du login
+  public UserAccount findByEmailAndPassword(Login login) {
+    LoginEntity loginEntity = loginRepository.findByEmailAndPassword(login.getEmail(), login.getPassword()).orElseThrow(() -> new NoSuchElementException("email " + login.getEmail() + " doesn't exist or password is false"));
+    UserAccount userAccount = new UserAccount();
+    mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
+    return userAccount;
+  }
+
+  // ajout d'une méthode pour récupérer le userAccount correspondant au login
+  public UserAccount findByEmail(String email) {
+    LoginEntity loginEntity = loginRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("email " + email + " doesn't exist or password is false"));
+    UserAccount userAccount = new UserAccount();
+    mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
+    return userAccount;
   }
 
   @Transactional
