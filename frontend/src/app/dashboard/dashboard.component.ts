@@ -36,4 +36,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['signin']);
   }
 
+  onAddConnection() {
+    this.router.navigate(['addConnection']);
+  }
+
 }
