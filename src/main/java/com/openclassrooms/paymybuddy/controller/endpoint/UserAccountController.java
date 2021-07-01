@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
 
-// ajout annotation pour contourner le contrôle de la faille de sécurité
 @CrossOrigin(origins="*")
 @RestController
 public class UserAccountController {
@@ -33,21 +32,11 @@ public class UserAccountController {
   @Autowired
   private MapService mapService;
 
-  @GetMapping("/useraccounts/{email}/{password}")
-  public UserAccountResponse getUserAccountByEmailAndPassword(@PathVariable("email") String email, @PathVariable("password") String password) {
-    try {
-      return mapService.convertUserAccountToUserAccountResponse(userAccountService.getUserAccount(email, password));
-    } catch (NoSuchElementException e) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "email " + email + " doesn't exist or password is false");
-    }
-  }
-
   @GetMapping("/useraccounts")
   public List<UserAccountResponse> getUserAccounts() {
     return userAccountService.getUserAccounts().stream().map(p -> mapService.convertUserAccountToUserAccountResponse(p)).collect(Collectors.toList());
   }
 
-  // Ajout de la méthode pour checker l'existence du login
   @PostMapping("/checkuseraccounts")
   public UserAccountResponse checkUserAccount(@RequestBody Login login) {
     try {
@@ -57,7 +46,6 @@ public class UserAccountController {
     }
   }
 
-  // ajout d'une méthode pour récupérer le userAccount correspondant au login
   @GetMapping("/getuseraccounts/{email}")
   public UserAccountResponse getUserAccountByLogin(@PathVariable("email") String email) {
     try {

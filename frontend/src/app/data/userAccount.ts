@@ -1,5 +1,3 @@
-// Ajouter entièrement
-
 export class UserAccount {
 
   public loginId: number;

@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-// Y: ajout de l'import pour récupérer les userAccounts
 import {UserAccount} from "../data/userAccount";
 import {Observable} from "rxjs";
 import {Login} from "../data/login";
@@ -8,8 +7,12 @@ import {Login} from "../data/login";
 @Injectable()
 export class AuthService {
 
-  // ajout du système d'authentification et de desauthentification
   isAuth = false;
+  private userAccountsUrl: string;
+
+  constructor(private http: HttpClient) {
+    this.userAccountsUrl = 'http://localhost:9001/useraccounts';
+  }
 
   public signIn() {
     this.isAuth = true;
@@ -19,45 +22,21 @@ export class AuthService {
     this.isAuth = false;
   }
 
-
-  private createAccountUrl: string;
-
-  // ajout d'une url
-  private userAccountsUrl: string;
-
-  constructor(private http: HttpClient) {
-    this.createAccountUrl = 'http://localhost:9001/useraccounts/';
-    this.userAccountsUrl = 'http://localhost:9001/useraccounts';
-  }
-
-  // Y: ajout de la méthode pour récupérer un userAccount avec son adresse mail
-  public getUserAccount(email: string) {
-    return this.http.get<UserAccount>(this.createAccountUrl+email);
-  }
-
-  // ajout de la méthode pour récupérer un userAccount avec son email et password
-  public checkUserAccount(email: string, password: string) {
-    return this.http.get<UserAccount>(this.createAccountUrl+email+'/'+password);
-  }
-
-  // ajout de la méthode pour récupérer tous les userAccounts
-  public getUserAccounts(): Observable<UserAccount[]> {
-    return this.http.get<UserAccount[]>(this.userAccountsUrl);
-  }
-
-  // ajout de la méthode pour sauvegarder un useraccount
   public saveUserAccount(userAccount: UserAccount) {
     return this.http.post<UserAccount>('http://localhost:9001/useraccounts', userAccount);
   }
 
-  // ajout d'une méthode d'authentification via un post
   public checkLogin(login: Login) {
     return this.http.post<Login>('http://localhost:9001/checkuseraccounts', login);
   }
 
-  // ajout d'une méthode pour récupérer le userAccount correspondant au login
-  public getUserAccountByLogin(email: string) {
+  public getUserAccountByEmail(email: string) {
     return this.http.get<UserAccount>('http://localhost:9001/getuseraccounts/'+email);
+  }
+
+  // conservation d'une méthode pour récupérer tous les userAccounts qui pourra servir pour les transactions
+  public getUserAccounts(): Observable<UserAccount[]> {
+    return this.http.get<UserAccount[]>(this.userAccountsUrl);
   }
 
 }

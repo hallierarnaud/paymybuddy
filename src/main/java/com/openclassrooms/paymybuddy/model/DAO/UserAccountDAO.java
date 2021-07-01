@@ -38,24 +38,18 @@ public class UserAccountDAO {
   @Autowired
   MapDAO mapDAO;
 
-  public UserAccount findByEmailAndPassword(String email, String password) {
-    LoginEntity loginEntity = loginRepository.findByEmailAndPassword(email, password).orElseThrow(() -> new NoSuchElementException("email " + email + " doesn't exist or password is false"));
-    UserAccount userAccount = new UserAccount();
-    mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
-    return userAccount;
-  }
-
   public List<UserAccount> findAll() {
     List<LoginEntity> loginEntities =  StreamSupport.stream(loginRepository.findAll().spliterator(),false)
             .collect(Collectors.toList());
     return loginEntities.stream().map((loginEntity) -> {
       UserAccount userAccount = new UserAccount();
-      mapDAO.updateUserAccountWithLoginEntity(userAccount, loginEntity);
+      userAccount.setLoginId(loginEntity.getId());
+      userAccount.setEmail(loginEntity.getEmail());
+      userAccount.setPassword(loginEntity.getPassword());
       return userAccount;
     }).collect(Collectors.toList());
   }
 
-  // Ajout de la méthode pour checker l'existence du login
   public UserAccount findByEmailAndPassword(Login login) {
     LoginEntity loginEntity = loginRepository.findByEmailAndPassword(login.getEmail(), login.getPassword()).orElseThrow(() -> new NoSuchElementException("email " + login.getEmail() + " doesn't exist or password is false"));
     UserAccount userAccount = new UserAccount();
@@ -63,7 +57,6 @@ public class UserAccountDAO {
     return userAccount;
   }
 
-  // ajout d'une méthode pour récupérer le userAccount correspondant au login
   public UserAccount findByEmail(String email) {
     LoginEntity loginEntity = loginRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("email " + email + " doesn't exist or password is false"));
     UserAccount userAccount = new UserAccount();

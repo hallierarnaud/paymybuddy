@@ -21,19 +21,11 @@ public class UserAccountService {
   @Autowired
   private UserAccountDAO userAccountDAO;
 
-  public UserAccount getUserAccount(final String email, final String password) {
-    if (userAccountDAO.findByEmailAndPassword(email, password) == null) {
-      throw new NoSuchElementException("email " + email + " doesn't exist or password is false");
-    }
-    return userAccountDAO.findByEmailAndPassword(email, password);
-  }
-
   public List<UserAccount> getUserAccounts() {
     return StreamSupport.stream(userAccountDAO.findAll().spliterator(),false)
             .collect(Collectors.toList());
   }
 
-  // Ajout de la méthode pour checker l'existence du login
   public UserAccount checkUserAccount(Login login) {
     if (userAccountDAO.findByEmailAndPassword(login) == null) {
       throw new NoSuchElementException("email " + login.getEmail() + " doesn't exist or password is false");
@@ -41,7 +33,6 @@ public class UserAccountService {
     return userAccountDAO.findByEmailAndPassword(login);
   }
 
-  // ajout d'une méthode pour récupérer le userAccount correspondant au login
   public UserAccount getUserAccountByLogin(final String email) {
     if (userAccountDAO.findByEmail(email) == null) {
       throw new NoSuchElementException("email " + email + " doesn't exist or password is false");
@@ -53,14 +44,7 @@ public class UserAccountService {
     /*if (userAccountDAO.existsByEmail(userAccountRequest.getEmail())) {
       throw new EntityExistsException("email " + userAccountRequest.getEmail() + " already exists");
     }*/
-    /*UserAccount userAccount = new UserAccount();
-    userAccount.setEmail(userAccountRequest.getEmail());
-    userAccount.setPassword(userAccountRequest.getPassword());
-    userAccount.setLastname(userAccountRequest.getLastname());
-    userAccount.setFirstname(userAccountRequest.getFirstname());
-    userAccount.setBirthdate(userAccountRequest.getBirthdate());
-    userAccount.setBalance(userAccountRequest.getBalance());
-    userAccount.setIban(userAccountRequest.getIban());*/
     return userAccountDAO.addUserAccount(userAccount);
   }
+
 }

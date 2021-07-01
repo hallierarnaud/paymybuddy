@@ -11,21 +11,27 @@ import {NgForm} from "@angular/forms";
 })
 export class UseraccountFormComponent implements OnInit {
 
+  authStatus: boolean;
   userAccount : UserAccount;
+  email: string;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router,
+              private authService: AuthService) {
     this.userAccount = new UserAccount();
   }
 
   ngOnInit(): void {
+    this.authStatus = this.authService.isAuth;
   }
 
   onSubmit(form: NgForm) {
-    this.authService.saveUserAccount(this.userAccount).subscribe(result => this.gotoUserAccountList());
-  }
-
-  gotoUserAccountList() {
-    this.router.navigate(['/userAccounts']);
+    this.authService.saveUserAccount(this.userAccount).subscribe(result => {
+      this.email = this.userAccount.email;
+      this.authService.signIn();
+      this.authStatus = this.authService.isAuth;
+      this.router.navigate(['/dashBoard'], {state: {data: this.email}});
+      }
+    )
   }
 
 }

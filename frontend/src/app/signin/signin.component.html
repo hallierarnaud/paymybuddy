@@ -1,38 +1,6 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <h2>Connection</h2>
-    <form [formGroup]="signInForm">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text"
-               id="email"
-               class="form-control"
-               formControlName="email">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password"
-               id="password"
-               class="form-control"
-               formControlName="password">
-      </div>
-      <!-- ajout des boutons d'authenfication et de desauthentification -->
-      <button class="btn btn-success" *ngIf="!authStatus" (click)="onSignIn()"
-              type="submit"
-              [disabled]="signInForm.invalid">Connect</button>
-      <button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()"
-              type="submit"
-              >Disconnect</button>
-      <!-- ajout d'un bouton pour récupérer les useraccounts -->
-      <button class="btn btn-primary"
-              type="submit" (click)="checkUserAccount()"
-      >Check userAccount</button>
-    </form>
-    <p class="text-danger">{{ errorMessage }}</p>
-  </div>
-</div>
-<div class="card my-5">
-  <div class="card-body">
     <form (ngSubmit)="onCheckLogin(loginForm)" #loginForm="ngForm">
       <div class="form-group">
         <label for="emailbis">Email</label>
@@ -54,9 +22,15 @@
                required #passwordbis="ngModel">
         <div [hidden]="!passwordbis.pristine" class="alert alert-danger">Password is required</div>
       </div>
-      <!-- ajout d'un bouton pour checker l'existence d'un login -->
-      <button type="submit" [disabled]="!loginForm.form.valid"
-              class="btn btn-info">Submit Login</button>
+      <ul class="text-center list-inline py-3">
+        <li class="list-inline-item">
+          <button type="submit" [disabled]="!loginForm.form.valid"
+              class="btn btn-success">Submit Login</button>
+        </li>
+        <li class="list-inline-item">
+          <a routerLink="/addUserAccount" class="btn btn-success">Create account</a>
+        </li>
+      </ul>
     </form>
   </div>
 </div>

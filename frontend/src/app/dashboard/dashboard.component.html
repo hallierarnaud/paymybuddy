@@ -30,5 +30,7 @@
         <td>{{ userAccount.iban }}</td>
       </tbody>
     </table>
+    <button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()"
+            type="submit">Disconnect</button>
   </div>
 </div>

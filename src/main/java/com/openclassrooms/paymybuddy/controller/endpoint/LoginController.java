@@ -1,6 +1,5 @@
 package com.openclassrooms.paymybuddy.controller.endpoint;
 
-import com.openclassrooms.paymybuddy.controller.DTO.LoginRequest;
 import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.service.LoginService;
 

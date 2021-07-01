@@ -8,9 +8,11 @@ import {Component} from '@angular/core';
 export class AppComponent {
 
   title: string;
+  subtitle: string;
 
   constructor() {
-    this.title = 'Spring Boot - Angular Application';
+    this.title = 'PayMyBuddy';
+    this.subtitle = 'Spring Boot - Angular Application';
   }
 
 }

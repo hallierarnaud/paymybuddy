@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserAccount} from "../data/userAccount";
 import {AuthService} from "../services/auth.service";
 import {DatePipe} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,23 +12,28 @@ import {DatePipe} from "@angular/common";
 })
 export class DashboardComponent implements OnInit {
 
+  authStatus: boolean;
+
   userAccount: UserAccount = {} as UserAccount;
 
   constructor(private authService: AuthService,
+              private router: Router,
               private datePipe: DatePipe) {
   }
 
   ngOnInit() {
-    /*this.authService.getUserAccounts().subscribe(data => {
-      this.userAccounts = data;
-    })*/
+    this.authStatus = this.authService.isAuth;
     const loginEmail = window.history.state;
-    console.log('loginEmail :', loginEmail.data);
-    this.authService.getUserAccountByLogin(loginEmail.data).subscribe(userAccount => {
+    this.authService.getUserAccountByEmail(loginEmail.data).subscribe(userAccount => {
       this.userAccount = userAccount;
       this.userAccount.birthdate = this.datePipe.transform(this.userAccount.birthdate, 'dd/MM/yyyy');
-      console.log('userAccount: ', userAccount);
     })
+  }
+
+  onSignOut() {
+    this.authService.signOut();
+    this.authStatus = this.authService.isAuth;
+    this.router.navigate(['signin']);
   }
 
 }
