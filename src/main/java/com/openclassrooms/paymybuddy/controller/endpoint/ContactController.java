@@ -41,7 +41,7 @@ public class ContactController {
     }
   }
 
-  /*@PostMapping("/contacts")
+  @PostMapping("/contacts")
   public ContactResponse addContact(@RequestBody ContactRequest contactRequest) {
     try {
       return contactService.addContact(contactRequest);
@@ -49,6 +49,6 @@ public class ContactController {
       // TODO : spécifier le contact déjà existant
       throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "contact " + contactRequest.getContactIdList() + " already exists");
     }
-  }*/
+  }
 
 }

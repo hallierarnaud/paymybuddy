@@ -41,21 +41,28 @@ public class ContactService {
     return contactsByUserId;
   }
 
-  /*public ContactResponse addContact(ContactRequest contactRequest) {
+  public ContactResponse addContact(ContactRequest contactRequest) {
     // TODO : ajouter le renvoi d'un contact déjà existant et corriger la méthode findById
-    for (Long contactId : contactRequest.getContactIdList()) {
+    /*for (Long contactId : contactRequest.getContactIdList()) {
       if (contactDAO.findById(contactId)) {
         throw new EntityExistsException("contact " + contactId + " already exists");
       }
-    }
+    }*/
     Contact contact = new Contact();
     contact.setUserId(contactRequest.getUserId());
-    contact.setContactIdList(contactRequest.getContactIdList());
-    contactDAO.addContact(contact);
+    for (Long contactId : contactRequest.getContactIdList()) {
+      contact.setContactId(contactId);
+      contactDAO.addContact(contact);
+    }
+    /*contact.setContactId(contactRequest.getContactIdList());
+    contactDAO.addContact(contact);*/
     ContactResponse contactResponse = new ContactResponse();
     contactResponse.setUserId(contactRequest.getUserId());
-    contactResponse.setContactIdList(contactRequest.getContactIdList());
+    for (Long contactId : contactRequest.getContactIdList()) {
+      contactResponse.setContactId(contactId);
+    }
+    //contactResponse.setContactIdList(contactRequest.getContactIdList());
     return contactResponse;
-  }*/
+  }
 
 }

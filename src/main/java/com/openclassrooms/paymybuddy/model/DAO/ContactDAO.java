@@ -42,19 +42,19 @@ public class ContactDAO {
     }).collect(Collectors.toList());
   }
 
-  /*public Contact addContact(Contact contact) {
+  public Contact addContact(Contact contact) {
     List<Long> relationIdList = new ArrayList<>();
-    for (Long contactId : contact.getContactIdList()) {
+    //for (Long contactId : contact.getContactIdList()) {
       ContactEntity contactEntity = new ContactEntity();
       UserEntity userEntity = userRepository.findById(contact.getUserId()).orElseThrow(() -> new NoSuchElementException("user " + contact.getUserId() + " doesn't exist"));
       contactEntity.setUserEntity(userEntity);
-      UserEntity userEntityAsContact = userRepository.findById(contactId).orElseThrow(() -> new NoSuchElementException("user " + contactId + " doesn't exist"));
+      UserEntity userEntityAsContact = userRepository.findById(contact.getContactId()).orElseThrow(() -> new NoSuchElementException("user " + contact.getContactId() + " doesn't exist"));
       contactEntity.setUserEntityAsContact(userEntityAsContact);
       contactRepository.save(contactEntity);
       relationIdList.add(contactEntity.getId());
-    }
-    contact.setRelationId(relationIdList);
+    //}
+    //contact.setRelationId(relationIdList);
     return contact;
-  }*/
+  }
 
 }
