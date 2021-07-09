@@ -2,7 +2,6 @@ package com.openclassrooms.paymybuddy.controller.endpoint;
 
 import com.openclassrooms.paymybuddy.controller.DTO.ContactRequest;
 import com.openclassrooms.paymybuddy.controller.DTO.ContactResponse;
-import com.openclassrooms.paymybuddy.domain.object.Contact;
 import com.openclassrooms.paymybuddy.domain.service.ContactService;
 import com.openclassrooms.paymybuddy.domain.service.MapService;
 
@@ -42,7 +41,7 @@ public class ContactController {
   }
 
   @PostMapping("/contacts")
-  public ContactResponse addContact(@RequestBody ContactRequest contactRequest) {
+  public List<ContactResponse> addContact(@RequestBody ContactRequest contactRequest) {
     try {
       return contactService.addContact(contactRequest);
     } catch (EntityExistsException e) {

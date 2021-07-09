@@ -1,9 +1,8 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
+import com.openclassrooms.paymybuddy.controller.DTO.ContactResponse;
 import com.openclassrooms.paymybuddy.domain.object.Contact;
-import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.model.entity.ContactEntity;
-import com.openclassrooms.paymybuddy.model.entity.LoginEntity;
 import com.openclassrooms.paymybuddy.model.entity.UserEntity;
 import com.openclassrooms.paymybuddy.model.repository.ContactRepository;
 import com.openclassrooms.paymybuddy.model.repository.UserRepository;
@@ -11,8 +10,6 @@ import com.openclassrooms.paymybuddy.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -42,19 +39,20 @@ public class ContactDAO {
     }).collect(Collectors.toList());
   }
 
-  public Contact addContact(Contact contact) {
-    List<Long> relationIdList = new ArrayList<>();
-    //for (Long contactId : contact.getContactIdList()) {
-      ContactEntity contactEntity = new ContactEntity();
-      UserEntity userEntity = userRepository.findById(contact.getUserId()).orElseThrow(() -> new NoSuchElementException("user " + contact.getUserId() + " doesn't exist"));
-      contactEntity.setUserEntity(userEntity);
-      UserEntity userEntityAsContact = userRepository.findById(contact.getContactId()).orElseThrow(() -> new NoSuchElementException("user " + contact.getContactId() + " doesn't exist"));
-      contactEntity.setUserEntityAsContact(userEntityAsContact);
-      contactRepository.save(contactEntity);
-      relationIdList.add(contactEntity.getId());
-    //}
-    //contact.setRelationId(relationIdList);
-    return contact;
+  public ContactResponse addContact(Contact contact) {
+    ContactEntity contactEntity = new ContactEntity();
+    UserEntity userEntity = userRepository.findById(contact.getUserId()).orElseThrow(() -> new NoSuchElementException("user " + contact.getUserId() + " doesn't exist"));
+    contactEntity.setUserEntity(userEntity);
+    UserEntity userEntityAsContact = userRepository.findById(contact.getContactId()).orElseThrow(() -> new NoSuchElementException("user " + contact.getContactId() + " doesn't exist"));
+    contactEntity.setUserEntityAsContact(userEntityAsContact);
+    contactRepository.save(contactEntity);
+
+    ContactResponse contactResponse = new ContactResponse();
+    contactResponse.setRelationId(contactEntity.getId());
+    contactResponse.setUserId(contactEntity.getUserEntity().getId());
+    contactResponse.setContactId(contactEntity.getUserEntityAsContact().getId());
+    contactResponse.setContactEmail("TODO");
+    return contactResponse;
   }
 
 }
