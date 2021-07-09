@@ -34,7 +34,7 @@ public class ContactService {
     return contactsByUserId;
   }
 
-  public List<ContactResponse> addContact(ContactRequest contactRequest) {
+  public ContactResponse addContact(ContactRequest contactRequest) {
     // TODO : ajouter le renvoi d'un contact déjà existant et corriger la méthode findById
     /*for (Long contactId : contactRequest.getContactIdList()) {
       if (contactDAO.findById(contactId)) {
@@ -43,12 +43,8 @@ public class ContactService {
     }*/
     Contact contact = new Contact();
     contact.setUserId(contactRequest.getUserId());
-    List<ContactResponse> contacts = new ArrayList<>();
-    for (Long contactId : contactRequest.getContactIdList()) {
-      contact.setContactId(contactId);
-      contacts.add(contactDAO.addContact(contact));
-    }
-    return contacts;
+    contact.setContactId(contactRequest.getContactId());
+    return contactDAO.addContact(contact);
   }
 
 }

@@ -41,12 +41,12 @@ public class ContactController {
   }
 
   @PostMapping("/contacts")
-  public List<ContactResponse> addContact(@RequestBody ContactRequest contactRequest) {
+  public ContactResponse addContact(@RequestBody ContactRequest contactRequest) {
     try {
       return contactService.addContact(contactRequest);
     } catch (EntityExistsException e) {
       // TODO : spécifier le contact déjà existant
-      throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "contact " + contactRequest.getContactIdList() + " already exists");
+      throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "contact " + contactRequest.getContactId() + " already exists");
     }
   }
 
