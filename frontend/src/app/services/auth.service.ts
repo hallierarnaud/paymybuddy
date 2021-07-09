@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserAccount} from "../data/userAccount";
 import {Observable} from "rxjs";
 import {Login} from "../data/login";
+import {Contact} from "../data/contact";
 
 @Injectable()
 export class AuthService {
@@ -32,6 +33,10 @@ export class AuthService {
 
   public getUserAccountByEmail(email: string) {
     return this.http.get<UserAccount>('http://localhost:9001/getuseraccounts/'+email);
+  }
+
+  public getContactsByUserId(userId: string): Observable<Contact[]> {
+    return this.http.get<Contact[]>('http://localhost:9001/contacts/'+userId);
   }
 
   // conservation d'une méthode pour récupérer tous les userAccounts qui pourra servir pour les transactions

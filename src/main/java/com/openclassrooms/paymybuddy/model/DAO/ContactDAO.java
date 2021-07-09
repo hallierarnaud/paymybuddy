@@ -1,7 +1,9 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
 import com.openclassrooms.paymybuddy.domain.object.Contact;
+import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 import com.openclassrooms.paymybuddy.model.entity.ContactEntity;
+import com.openclassrooms.paymybuddy.model.entity.LoginEntity;
 import com.openclassrooms.paymybuddy.model.entity.UserEntity;
 import com.openclassrooms.paymybuddy.model.repository.ContactRepository;
 import com.openclassrooms.paymybuddy.model.repository.UserRepository;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Repository
 public class ContactDAO {
@@ -26,14 +30,19 @@ public class ContactDAO {
   @Autowired
   MapDAO mapDAO;
 
-  public Contact findById(Long id) {
-    ContactEntity contactEntity = contactRepository.findById(id).orElseThrow(() -> new NoSuchElementException("contact " + id + " doesn't exist"));
-    Contact contact = new Contact();
-    contact.setRelationId(Collections.singletonList(contactEntity.getId()));
-    return contact;
+  public List<Contact> findAll() {
+    List<ContactEntity> contactEntities =  StreamSupport.stream(contactRepository.findAll().spliterator(),false)
+            .collect(Collectors.toList());
+    return contactEntities.stream().map((contactEntity) -> {
+      Contact contact = new Contact();
+      contact.setRelationId(contactEntity.getId());
+      contact.setUserId(contactEntity.getUserEntity().getId());
+      contact.setContactId(contactEntity.getUserEntityAsContact().getId());
+      return contact;
+    }).collect(Collectors.toList());
   }
 
-  public Contact addContact(Contact contact) {
+  /*public Contact addContact(Contact contact) {
     List<Long> relationIdList = new ArrayList<>();
     for (Long contactId : contact.getContactIdList()) {
       ContactEntity contactEntity = new ContactEntity();
@@ -46,6 +55,6 @@ public class ContactDAO {
     }
     contact.setRelationId(relationIdList);
     return contact;
-  }
+  }*/
 
 }

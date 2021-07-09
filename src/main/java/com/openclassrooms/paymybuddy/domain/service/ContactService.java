@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.persistence.EntityExistsException;
 
@@ -24,20 +27,27 @@ public class ContactService {
   @Autowired
   private ContactDAO contactDAO;
 
-  public Contact getContact(final Long id) {
-    if (contactDAO.findById(id) == null) {
-      throw new NoSuchElementException("contact " + id + " doesn't exist");
+  public List<Contact> getContactsByUserId(final Long id) {
+    /*if (contactDAO.findAllByUserId(id) == null) {
+      throw new NoSuchElementException("id " + id + " doesn't exist or password is false");
+    }*/
+    List<Contact> contacts = contactDAO.findAll();
+    List<Contact> contactsByUserId = new ArrayList<>();
+    for (Contact contact : contacts) {
+      if (contact.getUserId() == id) {
+        contactsByUserId.add(contact);
+      }
     }
-    return contactDAO.findById(id);
+    return contactsByUserId;
   }
 
-  public ContactResponse addContact(ContactRequest contactRequest) {
+  /*public ContactResponse addContact(ContactRequest contactRequest) {
     // TODO : ajouter le renvoi d'un contact déjà existant et corriger la méthode findById
-    /*for (Long contactId : contactRequest.getContactIdList()) {
+    for (Long contactId : contactRequest.getContactIdList()) {
       if (contactDAO.findById(contactId)) {
         throw new EntityExistsException("contact " + contactId + " already exists");
       }
-    }*/
+    }
     Contact contact = new Contact();
     contact.setUserId(contactRequest.getUserId());
     contact.setContactIdList(contactRequest.getContactIdList());
@@ -46,6 +56,6 @@ public class ContactService {
     contactResponse.setUserId(contactRequest.getUserId());
     contactResponse.setContactIdList(contactRequest.getContactIdList());
     return contactResponse;
-  }
+  }*/
 
 }

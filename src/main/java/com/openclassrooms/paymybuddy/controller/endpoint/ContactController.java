@@ -8,6 +8,7 @@ import com.openclassrooms.paymybuddy.domain.service.MapService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +18,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
 
+@CrossOrigin(origins="*")
 @RestController
 public class ContactController {
 
@@ -30,15 +33,15 @@ public class ContactController {
   private MapService mapService;
 
   @GetMapping("/contacts/{id}")
-  public Contact getContactById(@PathVariable("id") long id) {
+  public List<ContactResponse> getContactsByUserId(@PathVariable("id") long id) {
     try {
-      return contactService.getContact(id);
+      return contactService.getContactsByUserId(id).stream().map(p -> mapService.convertContactToContactResponse(p)).collect(Collectors.toList());
     } catch (NoSuchElementException e) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "contact " + id + " doesn't exist");
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "id " + id + " doesn't exist");
     }
   }
 
-  @PostMapping("/contacts")
+  /*@PostMapping("/contacts")
   public ContactResponse addContact(@RequestBody ContactRequest contactRequest) {
     try {
       return contactService.addContact(contactRequest);
@@ -46,6 +49,6 @@ public class ContactController {
       // TODO : spécifier le contact déjà existant
       throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "contact " + contactRequest.getContactIdList() + " already exists");
     }
-  }
+  }*/
 
 }

@@ -1,6 +1,8 @@
 package com.openclassrooms.paymybuddy.domain.service;
 
+import com.openclassrooms.paymybuddy.controller.DTO.ContactResponse;
 import com.openclassrooms.paymybuddy.controller.DTO.UserAccountResponse;
+import com.openclassrooms.paymybuddy.domain.object.Contact;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +24,15 @@ public class MapService {
     userAccountResponse.setExternalAccountId(userAccount.getExternalAccountId());
     userAccountResponse.setIban(userAccount.getIban());
     return userAccountResponse;
+  }
+
+  public ContactResponse convertContactToContactResponse(Contact contact) {
+    ContactResponse contactResponse = new ContactResponse();
+    contactResponse.setRelationId(contact.getRelationId());
+    contactResponse.setUserId(contact.getUserId());
+    contactResponse.setContactId(contact.getContactId());
+    contactResponse.setContactEmail(contact.getContactEmail());
+    return contactResponse;
   }
 
 }

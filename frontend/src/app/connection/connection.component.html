@@ -1,1 +1,22 @@
-<p>connection works!</p>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Relation Id</th>
+        <th scope="col">User Id</th>
+        <th scope="col">Contact Id</th>
+        <th scope="col">Contact Email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.relationId }}</td>
+        <td>{{ contact.userId }}</td>
+        <td>{{ contact.contactId }}</td>
+        <td>{{ contact.contactEmail }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

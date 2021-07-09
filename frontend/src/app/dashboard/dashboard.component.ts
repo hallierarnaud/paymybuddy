@@ -13,6 +13,7 @@ import {Router} from "@angular/router";
 export class DashboardComponent implements OnInit {
 
   authStatus: boolean;
+  userId: number;
 
   userAccount: UserAccount = {} as UserAccount;
 
@@ -37,7 +38,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onAddConnection() {
-    this.router.navigate(['addConnection']);
+    this.userId = this.userAccount.userId;
+    this.router.navigate(['addConnection'], {state: {data: this.userId}});
   }
 
 }
