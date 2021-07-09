@@ -1,8 +1,8 @@
 export class Contact {
 
-  public relationId: string;
-  public userId: string;
-  public contactId: string;
+  public relationId: number;
+  public userId: number;
+  public contactId: number;
   public contactEmail: string;
 
 }

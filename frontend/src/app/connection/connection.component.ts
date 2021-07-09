@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Contact} from "../data/contact";
 import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-connection',
@@ -14,13 +15,18 @@ export class ConnectionComponent implements OnInit {
 
   contacts: Contact[];
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
     const userId = window.history.state;
     this.authService.getContactsByUserId(userId.data).subscribe(data => {
       this.contacts = data;
     })
+  }
+
+  onCreateConnection() {
+    this.router.navigate(['newConnection']);
   }
 
 }

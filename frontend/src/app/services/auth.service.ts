@@ -39,6 +39,10 @@ export class AuthService {
     return this.http.get<Contact[]>('http://localhost:9001/contacts/'+userId);
   }
 
+  public saveConnection(contact: Contact) {
+    return this.http.post<Contact>('http://localhost:9001/contacts', contact);
+  }
+
   // conservation d'une méthode pour récupérer tous les userAccounts qui pourra servir pour les transactions
   public getUserAccounts(): Observable<UserAccount[]> {
     return this.http.get<UserAccount[]>(this.userAccountsUrl);
