@@ -1,0 +1,28 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit(connectionForm)" #connectionForm="ngForm">
+      <div class="form-group">
+        <label for="userId">User Id</label>
+        <input type="text" [(ngModel)]="contact.userId"
+               class="form-control"
+               id="userId"
+               name="userId"
+               placeholder="Enter your user id"
+               required #userId="ngModel">
+        <div [hidden]="!userId.pristine" class="alert alert-danger">User id is required</div>
+      </div>
+      <div class="form-group">
+        <label for="contactId">Contact Id</label>
+        <input type="text" [(ngModel)]="contact.contactId"
+               class="form-control"
+               id="contactId"
+               name="contactId"
+               placeholder="Enter the contact id"
+               required #contactId="ngModel">
+        <div [hidden]="!contactId.pristine" class="alert alert-danger">Contact Id is required</div>
+      </div>
+      <button type="submit" [disabled]="!connectionForm.form.valid"
+              class="btn btn-success">Submit</button>
+    </form>
+  </div>
+</div>

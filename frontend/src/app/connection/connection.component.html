@@ -1,0 +1,28 @@
+<div class="card my-5">
+  <div class="card-body">
+    <ul class="text-center list-inline py-3">
+      <li class="list-inline-item">
+        <button class="btn btn-success" (click)="onCreateConnection()"
+        >Create connection</button>
+      </li>
+    </ul>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Relation Id</th>
+        <th scope="col">User Id</th>
+        <th scope="col">Contact Id</th>
+        <th scope="col">Contact Email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.relationId }}</td>
+        <td>{{ contact.userId }}</td>
+        <td>{{ contact.contactId }}</td>
+        <td>{{ contact.contactEmail }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
