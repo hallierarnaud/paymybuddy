@@ -2,16 +2,6 @@
   <div class="card-body">
     <form (ngSubmit)="onSubmit(connectionForm)" #connectionForm="ngForm">
       <div class="form-group">
-        <label for="userId">User Id</label>
-        <input type="text" [(ngModel)]="contact.userId"
-               class="form-control"
-               id="userId"
-               name="userId"
-               placeholder="Enter your user id"
-               required #userId="ngModel">
-        <div [hidden]="!userId.pristine" class="alert alert-danger">User id is required</div>
-      </div>
-      <div class="form-group">
         <label for="contactId">Contact Id</label>
         <input type="text" [(ngModel)]="contact.contactId"
                class="form-control"

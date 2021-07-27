@@ -14,19 +14,19 @@ export class ConnectionListComponent implements OnInit {
   //TODO: utiliser un formulaire réactif pour pouvoir ajouter des cases à volonté pour ajouter des contacts
 
   contacts: Contact[];
+  userId = window.history.state;
 
   constructor(private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
-    const userId = window.history.state;
-    this.authService.getContactsByUserId(userId.data).subscribe(data => {
+    this.authService.getContactsByUserId(this.userId.data).subscribe(data => {
       this.contacts = data;
     })
   }
 
   onCreateConnection() {
-    this.router.navigate(['newConnection']);
+    this.router.navigate(['newConnection'], {state: {transferredData: this.userId}});
   }
 
 }

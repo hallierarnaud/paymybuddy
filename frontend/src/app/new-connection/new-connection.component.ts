@@ -16,7 +16,6 @@ export class NewConnectionComponent implements OnInit {
   userId: number;
   contactId: number;
 
-
   constructor(private router: Router,
               private authService: AuthService) {
     this.contact = new Contact();
@@ -27,8 +26,9 @@ export class NewConnectionComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    const currentUserId = window.history.state;
+    this.contact.userId = currentUserId.transferredData.data;
     this.authService.saveConnection(this.contact).subscribe(result => {
-      this.userId = this.contact.userId;
       this.contactId = this.contact.contactId;
       this.router.navigate(['addConnection'], {state: {data: this.contact.userId}});
     })
