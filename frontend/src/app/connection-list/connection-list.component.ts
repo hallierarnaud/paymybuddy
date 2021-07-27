@@ -5,10 +5,10 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-connection',
-  templateUrl: './connection.component.html',
-  styleUrls: ['./connection.component.scss']
+  templateUrl: './connection-list.component.html',
+  styleUrls: ['./connection-list.component.scss']
 })
-export class ConnectionComponent implements OnInit {
+export class ConnectionListComponent implements OnInit {
 
   //TODO: penser à protéger ce path
   //TODO: utiliser un formulaire réactif pour pouvoir ajouter des cases à volonté pour ajouter des contacts
