@@ -27,8 +27,8 @@ public class ContactDAO {
   @Autowired
   MapDAO mapDAO;
 
-  public List<Contact> findAll() {
-    List<ContactEntity> contactEntities =  StreamSupport.stream(contactRepository.findAll().spliterator(),false)
+  public List<Contact> findAllByUserId(Long userId) {
+    List<ContactEntity> contactEntities =  StreamSupport.stream(contactRepository.findByUserEntity_Id(userId).spliterator(),false)
             .collect(Collectors.toList());
     return contactEntities.stream().map((contactEntity) -> {
       Contact contact = new Contact();

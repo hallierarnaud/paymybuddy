@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContactRepository extends JpaRepository<ContactEntity, Long> {
+  
+  Iterable<ContactEntity> findByUserEntity_Id(Long userId);
+  
 }

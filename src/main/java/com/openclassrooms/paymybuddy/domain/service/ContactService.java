@@ -20,18 +20,12 @@ public class ContactService {
   @Autowired
   private ContactDAO contactDAO;
 
-  public List<Contact> getContactsByUserId(final Long id) {
+  public List<Contact> getContactsByUserId(final Long userId) {
     /*if (contactDAO.findAllByUserId(id) == null) {
       throw new NoSuchElementException("id " + id + " doesn't exist or password is false");
     }*/
-    List<Contact> contacts = contactDAO.findAll();
-    List<Contact> contactsByUserId = new ArrayList<>();
-    for (Contact contact : contacts) {
-      if (contact.getUserId() == id) {
-        contactsByUserId.add(contact);
-      }
-    }
-    return contactsByUserId;
+    List<Contact> contacts = contactDAO.findAllByUserId(userId);
+    return contacts;
   }
 
   public ContactResponse addContact(ContactRequest contactRequest) {
