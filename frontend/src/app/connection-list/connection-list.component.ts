@@ -10,9 +10,6 @@ import {Router} from "@angular/router";
 })
 export class ConnectionListComponent implements OnInit {
 
-  //TODO: penser à protéger ce path
-  //TODO: utiliser un formulaire réactif pour pouvoir ajouter des cases à volonté pour ajouter des contacts
-
   contacts: Contact[];
   userId = window.history.state;
 
@@ -22,7 +19,7 @@ export class ConnectionListComponent implements OnInit {
   ngOnInit() {
     this.authService.getContactsByUserId(this.userId.data).subscribe(data => {
       this.contacts = data;
-    })
+    });
   }
 
   onCreateConnection() {

@@ -12,6 +12,8 @@ import {UserAccount} from "../data/userAccount";
 })
 export class NewConnectionComponent implements OnInit {
 
+  //TODO: utiliser un formulaire réactif pour pouvoir ajouter des cases à volonté pour ajouter des contacts
+
   authStatus: boolean;
   contact: Contact;
   userAccount: UserAccount = {} as UserAccount;
