@@ -2,14 +2,14 @@
   <div class="card-body">
     <form (ngSubmit)="onSubmit(connectionForm)" #connectionForm="ngForm">
       <div class="form-group">
-        <label for="contactId">Contact Id</label>
-        <input type="text" [(ngModel)]="contact.contactId"
+        <label for="contactEmail">Contact Email</label>
+        <input type="text" [(ngModel)]="contact.contactEmail"
                class="form-control"
-               id="contactId"
-               name="contactId"
-               placeholder="Enter the contact id"
-               required #contactId="ngModel">
-        <div [hidden]="!contactId.pristine" class="alert alert-danger">Contact Id is required</div>
+               id="contactEmail"
+               name="contactEmail"
+               placeholder="Enter the wished contact email"
+               required #contactEmail="ngModel">
+        <div [hidden]="!contactEmail.pristine" class="alert alert-danger">Contact email is required</div>
       </div>
       <button type="submit" [disabled]="!connectionForm.form.valid"
               class="btn btn-success">Submit</button>

@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {Contact} from "../data/contact";
+import {UserAccount} from "../data/userAccount";
 
 @Component({
   selector: 'app-new-connection',
@@ -13,8 +14,7 @@ export class NewConnectionComponent implements OnInit {
 
   authStatus: boolean;
   contact: Contact;
-  userId: number;
-  contactId: number;
+  userAccount: UserAccount = {} as UserAccount;
 
   constructor(private router: Router,
               private authService: AuthService) {
@@ -28,10 +28,13 @@ export class NewConnectionComponent implements OnInit {
   onSubmit(form: NgForm) {
     const currentUserId = window.history.state;
     this.contact.userId = currentUserId.transferredData.data;
-    this.authService.saveConnection(this.contact).subscribe(result => {
-      this.contactId = this.contact.contactId;
-      this.router.navigate(['addConnection'], {state: {data: this.contact.userId}});
-    })
+    this.authService.getUserAccountByEmail(this.contact.contactEmail).subscribe(userAccount => {
+      this.userAccount = userAccount;
+      this.contact.contactId = this.userAccount.userId;
+      this.authService.saveConnection(this.contact).subscribe(result => {
+        this.router.navigate(['addConnection'], {state: {data: this.contact.userId}});
+      });
+    });
   }
 
 }
