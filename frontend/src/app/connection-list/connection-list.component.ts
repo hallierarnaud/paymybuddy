@@ -26,7 +26,7 @@ export class ConnectionListComponent implements OnInit {
   }
 
   onCreateConnection() {
-    this.router.navigate(['newConnection'], {state: {transferredData: this.userId}});
+    this.router.navigate(['addConnection'], {state: {transferredData: this.userId}});
   }
 
 }

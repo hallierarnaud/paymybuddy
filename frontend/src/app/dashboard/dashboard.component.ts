@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
 
   onAddConnection() {
     this.userId = this.userAccount.userId;
-    this.router.navigate(['addConnection'], {state: {data: this.userId}});
+    this.router.navigate(['connectionList'], {state: {data: this.userId}});
   }
 
 }

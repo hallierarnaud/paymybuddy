@@ -32,7 +32,7 @@ export class NewConnectionComponent implements OnInit {
       this.userAccount = userAccount;
       this.contact.contactId = this.userAccount.userId;
       this.authService.saveConnection(this.contact).subscribe(result => {
-        this.router.navigate(['addConnection'], {state: {data: this.contact.userId}});
+        this.router.navigate(['connectionList'], {state: {data: this.contact.userId}});
       });
     });
   }
