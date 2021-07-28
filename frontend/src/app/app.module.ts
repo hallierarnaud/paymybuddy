@@ -20,8 +20,8 @@ const appRoutes: Routes = [
   { path: 'addUserAccount', component: UseraccountFormComponent},
   { path: 'signin', component: SigninComponent},
   { path: 'dashBoard', canActivate:[AuthGuardService], component: DashboardComponent},
-  { path: 'connectionList', component: ConnectionListComponent},
-  { path: 'addConnection', component: NewConnectionComponent},
+  { path: 'connectionList', canActivate:[AuthGuardService], component: ConnectionListComponent},
+  { path: 'addConnection', canActivate:[AuthGuardService], component: NewConnectionComponent},
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: '/not-found' }
