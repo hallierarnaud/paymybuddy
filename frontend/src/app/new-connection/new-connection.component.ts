@@ -12,7 +12,7 @@ import {UserAccount} from "../data/userAccount";
 })
 export class NewConnectionComponent implements OnInit {
 
-  //TODO: utiliser un formulaire réactif pour pouvoir ajouter des cases à volonté pour ajouter des contacts
+  //possible d'utiliser un formulaire réactif pour pouvoir rajouter des cases à volonté pour ajouter des contacts
 
   authStatus: boolean;
   contact: Contact;

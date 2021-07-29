@@ -45,7 +45,6 @@ public class ContactController {
     try {
       return contactService.addContact(contactRequest);
     } catch (EntityExistsException e) {
-      // TODO : spécifier le contact déjà existant
       throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "contact " + contactRequest.getContactId() + " already exists");
     }
   }

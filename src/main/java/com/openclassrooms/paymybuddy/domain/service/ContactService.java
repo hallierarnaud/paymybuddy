@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityExistsException;
+
 import lombok.Data;
 
 @Data
@@ -26,9 +28,6 @@ public class ContactService {
   private LoginDAO loginDAO;
 
   public List<Contact> getContactsByUserId(final Long userId) {
-    /*if (contactDAO.findAllByUserId(id) == null) {
-      throw new NoSuchElementException("id " + id + " doesn't exist or password is false");
-    }*/
     List<Contact> contacts = contactDAO.findAllByUserId(userId);
     for (Contact contact : contacts) {
       contact.setContactEmail(loginDAO.findByUserId(contact.getContactId()).getEmail());
@@ -37,12 +36,12 @@ public class ContactService {
   }
 
   public ContactResponse addContact(ContactRequest contactRequest) {
-    // TODO : ajouter le renvoi d'un contact déjà existant et corriger la méthode findById
-    /*for (Long contactId : contactRequest.getContactIdList()) {
-      if (contactDAO.findById(contactId)) {
-        throw new EntityExistsException("contact " + contactId + " already exists");
+    List<Contact> contacts = contactDAO.findAllByUserId(contactRequest.getUserId());
+    for (Contact contact : contacts) {
+      if (contactRequest.getContactId() == contact.getContactId()) {
+        throw new EntityExistsException("contact " + contactRequest.getContactId() + " already exists");
       }
-    }*/
+    }
     Contact contact = new Contact();
     contact.setUserId(contactRequest.getUserId());
     contact.setContactId(contactRequest.getContactId());

@@ -51,7 +51,6 @@ public class ContactDAO {
     contactResponse.setRelationId(contactEntity.getId());
     contactResponse.setUserId(contactEntity.getUserEntity().getId());
     contactResponse.setContactId(contactEntity.getUserEntityAsContact().getId());
-    contactResponse.setContactEmail("TODO");
     return contactResponse;
   }
 
