@@ -1,9 +1,10 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
-import com.openclassrooms.paymybuddy.domain.object.Contact;
+import com.openclassrooms.paymybuddy.controller.DTO.InternalTransactionResponse;
 import com.openclassrooms.paymybuddy.domain.object.InternalTransaction;
-import com.openclassrooms.paymybuddy.model.entity.ContactEntity;
+import com.openclassrooms.paymybuddy.model.entity.InternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.entity.InternalTransactionEntity;
+import com.openclassrooms.paymybuddy.model.repository.InternalAccountRepository;
 import com.openclassrooms.paymybuddy.model.repository.InternalTransactionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class InternalTransactionDAO {
   private InternalTransactionRepository internalTransactionRepository;
 
   @Autowired
+  private InternalAccountRepository internalAccountRepository;
+
+  @Autowired
   MapDAO mapDAO;
 
   public List<InternalTransaction> findAllBySenderAccountId(Long senderAccountId) {
@@ -35,6 +39,25 @@ public class InternalTransactionDAO {
       internalTransaction.setRecipientInternalAccountId(internalTransactionEntity.getSenderAccountEntity().getId());
       return internalTransaction;
     }).collect(Collectors.toList());
+  }
+
+  public InternalTransactionResponse addInternalTransaction(InternalTransaction internalTransaction) {
+    InternalTransactionEntity internalTransactionEntity = new InternalTransactionEntity();
+    internalTransactionEntity.setDescription(internalTransaction.getDescription());
+    internalTransactionEntity.setTransferredAmount(internalTransaction.getTransferredAmount());
+    InternalAccountEntity internalAccountEntityAsSender = internalAccountRepository.findById(internalTransaction.getSenderInternalAccountId()).orElseThrow(() -> new NoSuchElementException("internal account " + internalTransaction.getSenderInternalAccountId() + " doesn't exist"));
+    internalTransactionEntity.setSenderAccountEntity(internalAccountEntityAsSender);
+    InternalAccountEntity internalAccountEntityAsRecipient = internalAccountRepository.findById(internalTransaction.getRecipientInternalAccountId()).orElseThrow(() -> new NoSuchElementException("internal account " + internalTransaction.getRecipientInternalAccountId() + " doesn't exist"));
+    internalTransactionEntity.setRecipientAccountEntity(internalAccountEntityAsRecipient);
+    internalTransactionRepository.save(internalTransactionEntity);
+
+    InternalTransactionResponse internalTransactionResponse = new InternalTransactionResponse();
+    internalTransactionResponse.setId(internalTransactionEntity.getId());
+    internalTransactionResponse.setDescription(internalTransactionEntity.getDescription());
+    internalTransactionResponse.setTransferredAmount(internalTransactionEntity.getTransferredAmount());
+    internalTransactionResponse.setSenderInternalAccountId(internalTransactionEntity.getSenderAccountEntity().getId());
+    internalTransactionResponse.setRecipientInternalAccountId(internalTransactionEntity.getRecipientAccountEntity().getId());
+    return internalTransactionResponse;
   }
 
 }
