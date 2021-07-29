@@ -4,6 +4,8 @@ import com.openclassrooms.paymybuddy.controller.DTO.ContactRequest;
 import com.openclassrooms.paymybuddy.controller.DTO.ContactResponse;
 import com.openclassrooms.paymybuddy.domain.object.Contact;
 import com.openclassrooms.paymybuddy.model.DAO.ContactDAO;
+import com.openclassrooms.paymybuddy.model.DAO.LoginDAO;
+import com.openclassrooms.paymybuddy.model.DAO.UserDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +22,17 @@ public class ContactService {
   @Autowired
   private ContactDAO contactDAO;
 
+  @Autowired
+  private LoginDAO loginDAO;
+
   public List<Contact> getContactsByUserId(final Long userId) {
     /*if (contactDAO.findAllByUserId(id) == null) {
       throw new NoSuchElementException("id " + id + " doesn't exist or password is false");
     }*/
     List<Contact> contacts = contactDAO.findAllByUserId(userId);
+    for (Contact contact : contacts) {
+      contact.setContactEmail(loginDAO.findByUserId(contact.getContactId()).getEmail());
+    }
     return contacts;
   }
 
