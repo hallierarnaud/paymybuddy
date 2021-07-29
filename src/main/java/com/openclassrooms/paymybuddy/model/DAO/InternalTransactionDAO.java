@@ -28,15 +28,15 @@ public class InternalTransactionDAO {
   MapDAO mapDAO;
 
   public List<InternalTransaction> findAllBySenderAccountId(Long senderAccountId) {
-    List<InternalTransactionEntity> internalTransactions =  StreamSupport.stream(internalTransactionRepository.findInternalTransactionEntitiesBySenderAccountEntity_Id(senderAccountId).spliterator(),false)
+    List<InternalTransactionEntity> internalTransactions = StreamSupport.stream(internalTransactionRepository.findInternalTransactionEntitiesBySenderAccountEntity_Id(senderAccountId).spliterator(),false)
             .collect(Collectors.toList());
     return internalTransactions.stream().map((internalTransactionEntity) -> {
       InternalTransaction internalTransaction = new InternalTransaction();
       internalTransaction.setId(internalTransactionEntity.getId());
       internalTransaction.setDescription(internalTransactionEntity.getDescription());
-      internalTransaction.setTransferredAmount(internalTransaction.getTransferredAmount());
+      internalTransaction.setTransferredAmount(internalTransactionEntity.getTransferredAmount());
       internalTransaction.setSenderInternalAccountId(internalTransactionEntity.getSenderAccountEntity().getId());
-      internalTransaction.setRecipientInternalAccountId(internalTransactionEntity.getSenderAccountEntity().getId());
+      internalTransaction.setRecipientInternalAccountId(internalTransactionEntity.getRecipientAccountEntity().getId());
       return internalTransaction;
     }).collect(Collectors.toList());
   }
