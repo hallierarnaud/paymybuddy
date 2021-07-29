@@ -1,9 +1,9 @@
-package com.openclassrooms.paymybuddy.domain.object;
+package com.openclassrooms.paymybuddy.controller.DTO;
 
 import lombok.Data;
 
 @Data
-public class InternalTransaction {
+public class InternalTransactionResponse {
 
   private Long id;
   private String description;

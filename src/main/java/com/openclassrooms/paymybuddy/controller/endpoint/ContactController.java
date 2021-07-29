@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
@@ -33,11 +32,7 @@ public class ContactController {
 
   @GetMapping("/contacts/{id}")
   public List<ContactResponse> getContactsByUserId(@PathVariable("id") long id) {
-    try {
-      return contactService.getContactsByUserId(id).stream().map(p -> mapService.convertContactToContactResponse(p)).collect(Collectors.toList());
-    } catch (NoSuchElementException e) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "id " + id + " doesn't exist");
-    }
+    return contactService.getContactsByUserId(id).stream().map(p -> mapService.convertContactToContactResponse(p)).collect(Collectors.toList());
   }
 
   @PostMapping("/contacts")

@@ -1,8 +1,10 @@
 package com.openclassrooms.paymybuddy.domain.service;
 
 import com.openclassrooms.paymybuddy.controller.DTO.ContactResponse;
+import com.openclassrooms.paymybuddy.controller.DTO.InternalTransactionResponse;
 import com.openclassrooms.paymybuddy.controller.DTO.UserAccountResponse;
 import com.openclassrooms.paymybuddy.domain.object.Contact;
+import com.openclassrooms.paymybuddy.domain.object.InternalTransaction;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
 
 import org.springframework.stereotype.Service;
@@ -33,6 +35,16 @@ public class MapService {
     contactResponse.setContactId(contact.getContactId());
     contactResponse.setContactEmail(contact.getContactEmail());
     return contactResponse;
+  }
+
+  public InternalTransactionResponse convertInternalTransactionToInternalTransactionResponse(InternalTransaction internalTransaction) {
+    InternalTransactionResponse internalTransactionResponse = new InternalTransactionResponse();
+    internalTransactionResponse.setId(internalTransaction.getId());
+    internalTransactionResponse.setDescription(internalTransaction.getDescription());
+    internalTransactionResponse.setTransferredAmount(internalTransactionResponse.getTransferredAmount());
+    internalTransactionResponse.setSenderInternalAccountId(internalTransactionResponse.getSenderInternalAccountId());
+    internalTransactionResponse.setRecipientInternalAccountId(internalTransactionResponse.getRecipientInternalAccountId());
+    return internalTransactionResponse;
   }
 
 }

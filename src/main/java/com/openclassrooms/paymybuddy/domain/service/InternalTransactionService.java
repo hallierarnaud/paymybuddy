@@ -6,6 +6,7 @@ import com.openclassrooms.paymybuddy.model.DAO.InternalTransactionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import lombok.Data;
@@ -17,11 +18,9 @@ public class InternalTransactionService {
   @Autowired
   private InternalTransactionDAO internalTransactionDAO;
 
-  public InternalTransaction getInternalTransaction(final Long id) {
-    if (internalTransactionDAO.findById(id) == null) {
-      throw new NoSuchElementException("internal transaction " + id + " doesn't exist");
-    }
-    return internalTransactionDAO.findById(id);
+  public List<InternalTransaction> getInternalTransactionsBySenderAccountId(final Long senderAccountId) {
+    List<InternalTransaction> internalTransactions = internalTransactionDAO.findAllBySenderAccountId(senderAccountId);
+    return internalTransactions;
   }
 
 }

@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InternalTransactionRepository extends JpaRepository<InternalTransactionEntity, Long> {
+
+  Iterable<InternalTransactionEntity> findInternalTransactionEntitiesBySenderAccountEntity_Id(Long senderAccountId);
+
 }
