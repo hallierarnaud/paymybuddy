@@ -9,6 +9,7 @@ import com.openclassrooms.paymybuddy.model.repository.InternalTransactionReposit
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -41,6 +42,7 @@ public class InternalTransactionDAO {
     }).collect(Collectors.toList());
   }
 
+  @Transactional
   public InternalTransactionResponse addInternalTransaction(InternalTransaction internalTransaction) {
     InternalTransactionEntity internalTransactionEntity = new InternalTransactionEntity();
     internalTransactionEntity.setDescription(internalTransaction.getDescription());
@@ -50,6 +52,12 @@ public class InternalTransactionDAO {
     InternalAccountEntity internalAccountEntityAsRecipient = internalAccountRepository.findById(internalTransaction.getRecipientInternalAccountId()).orElseThrow(() -> new NoSuchElementException("internal account " + internalTransaction.getRecipientInternalAccountId() + " doesn't exist"));
     internalTransactionEntity.setRecipientAccountEntity(internalAccountEntityAsRecipient);
     internalTransactionRepository.save(internalTransactionEntity);
+
+    internalAccountEntityAsSender.setBalance(internalAccountEntityAsSender.getBalance() - internalTransaction.getTransferredAmount());
+    internalAccountRepository.save(internalAccountEntityAsSender);
+
+    internalAccountEntityAsRecipient.setBalance(internalAccountEntityAsRecipient.getBalance() + (internalTransaction.getTransferredAmount() * 0.95));
+    internalAccountRepository.save(internalAccountEntityAsRecipient);
 
     InternalTransactionResponse internalTransactionResponse = new InternalTransactionResponse();
     internalTransactionResponse.setId(internalTransactionEntity.getId());
