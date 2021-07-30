@@ -36,10 +36,4 @@ public class InternalAccountEntity {
   @OneToOne(mappedBy = "internalAccountEntity")
   private ExternalTransactionEntity externalTransactionEntity;
 
-  @OneToOne(mappedBy = "senderAccountEntity")
-  private InternalTransactionEntity internalTransactionEntitySender;
-
-  @OneToOne(mappedBy = "recipientAccountEntity")
-  private InternalTransactionEntity internalTransactionEntityRecipient;
-
 }
