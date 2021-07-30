@@ -5,5 +5,6 @@ export class Transaction {
   public transferredAmount: number;
   public senderInternalAccountId: number;
   public recipientInternalAccountId: number;
+  public recipientInternalAccountEmail: string;
 
 }

@@ -48,4 +48,8 @@ export class AuthService {
     return this.http.get<Transaction[]>(this.internalTransactionsUrl+internalAccountId);
   }
 
+  public saveTransaction(transaction: Transaction) {
+    return this.http.post<Transaction>('http://localhost:9001/internaltransactions', transaction);
+  }
+
 }

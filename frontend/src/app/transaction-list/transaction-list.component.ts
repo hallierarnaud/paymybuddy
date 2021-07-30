@@ -22,4 +22,8 @@ export class TransactionListComponent implements OnInit {
     });
   }
 
+  onCreateTransaction() {
+    this.router.navigate(['addTransaction'], {state: {transferredData: this.internalAccountId}});
+  }
+
 }

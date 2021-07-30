@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConnectionListComponent } from './connection-list/connection-list.component';
 import { NewConnectionComponent } from './new-connection/new-connection.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
+import { NewTransactionComponent } from './new-transaction/new-transaction.component';
 
 const appRoutes: Routes = [
   { path: 'addUserAccount', component: UseraccountFormComponent},
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
   { path: 'connectionList', canActivate:[AuthGuardService], component: ConnectionListComponent},
   { path: 'addConnection', canActivate:[AuthGuardService], component: NewConnectionComponent},
   { path: 'transactionList', canActivate:[AuthGuardService], component: TransactionListComponent},
+  { path: 'addTransaction', canActivate:[AuthGuardService], component: NewTransactionComponent},
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: '/not-found' }
@@ -39,7 +41,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     ConnectionListComponent,
     NewConnectionComponent,
-    TransactionListComponent
+    TransactionListComponent,
+    NewTransactionComponent
   ],
   imports: [
     BrowserModule,

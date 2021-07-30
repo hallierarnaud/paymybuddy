@@ -1,0 +1,38 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit(transactionForm)" #transactionForm="ngForm">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" [(ngModel)]="transaction.description"
+               class="form-control"
+               id="description"
+               name="description"
+               placeholder="Enter the transaction description"
+               required #transactionDescription="ngModel">
+        <div [hidden]="!transactionDescription.pristine" class="alert alert-danger">Description is required</div>
+      </div>
+      <div class="form-group">
+        <label for="transferredAmount">Transferred amount</label>
+        <input type="text" [(ngModel)]="transaction.transferredAmount"
+               class="form-control"
+               id="transferredAmount"
+               name="transferredAmount"
+               placeholder="Enter the transferredAmount"
+               required #transferredAmount="ngModel">
+        <div [hidden]="!transferredAmount.pristine" class="alert alert-danger">Transferred amount is required</div>
+      </div>
+      <div class="form-group">
+        <label for="recipientEmail">Recipient Email</label>
+        <input type="text" [(ngModel)]="transaction.recipientInternalAccountEmail"
+               class="form-control"
+               id="recipientEmail"
+               name="recipientEmail"
+               placeholder="Enter the recipient email"
+               required #recipientInternalAccountEmail="ngModel">
+        <div [hidden]="!recipientInternalAccountEmail.pristine" class="alert alert-danger">Recipient email is required</div>
+      </div>
+      <button type="submit" [disabled]="!transactionForm.form.valid"
+              class="btn btn-success">Submit</button>
+    </form>
+  </div>
+</div>
