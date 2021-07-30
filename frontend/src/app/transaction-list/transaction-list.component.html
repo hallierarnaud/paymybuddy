@@ -1,0 +1,30 @@
+<div class="card my-5">
+  <div class="card-body">
+    <ul class="text-center list-inline py-3">
+      <li class="list-inline-item">
+        <!--button class="btn btn-success" (click)="onCreateConnection()"
+        >Create connection</button-->
+      </li>
+    </ul>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Transaction Id</th>
+        <th scope="col">Description</th>
+        <th scope="col">Transferred amount</th>
+        <th scope="col">Sender Id</th>
+        <th scope="col">Recipient Id</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <td>{{ transaction.id }}</td>
+        <td>{{ transaction.description }}</td>
+        <td>{{ transaction.transferredAmount }}</td>
+        <td>{{ transaction.senderInternalAccountId }}</td>
+        <td>{{ transaction.recipientInternalAccountId }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
 
   authStatus: boolean;
   userId: number;
+  internalAccountId: number;
 
   userAccount: UserAccount = {} as UserAccount;
 
@@ -40,6 +41,11 @@ export class DashboardComponent implements OnInit {
   onAddConnection() {
     this.userId = this.userAccount.userId;
     this.router.navigate(['connectionList'], {state: {data: this.userId}});
+  }
+
+  onSendMoney() {
+    this.internalAccountId = this.userAccount.internalAccountId;
+    this.router.navigate(['transactionList'], {state: {data: this.internalAccountId}});
   }
 
 }

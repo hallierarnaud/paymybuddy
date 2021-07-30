@@ -15,6 +15,7 @@ import { UseraccountFormComponent } from './useraccount-form/useraccount-form.co
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConnectionListComponent } from './connection-list/connection-list.component';
 import { NewConnectionComponent } from './new-connection/new-connection.component';
+import { TransactionListComponent } from './transaction-list/transaction-list.component';
 
 const appRoutes: Routes = [
   { path: 'addUserAccount', component: UseraccountFormComponent},
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'dashBoard', canActivate:[AuthGuardService], component: DashboardComponent},
   { path: 'connectionList', canActivate:[AuthGuardService], component: ConnectionListComponent},
   { path: 'addConnection', canActivate:[AuthGuardService], component: NewConnectionComponent},
+  { path: 'transactionList', canActivate:[AuthGuardService], component: TransactionListComponent},
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: '/not-found' }
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
     UseraccountFormComponent,
     DashboardComponent,
     ConnectionListComponent,
-    NewConnectionComponent
+    NewConnectionComponent,
+    TransactionListComponent
   ],
   imports: [
     BrowserModule,
