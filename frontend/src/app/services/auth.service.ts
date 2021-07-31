@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {UserAccount} from "../data/userAccount";
 import {Observable} from "rxjs";
 import {Login} from "../data/login";
@@ -29,7 +29,8 @@ export class AuthService {
   }
 
   public getUserAccountByEmail(email: string) {
-    return this.http.get<UserAccount>('http://localhost:9001/getuseraccounts/'+email);
+    let parameter = new HttpParams().set('email', email);
+    return this.http.get<UserAccount>('http://localhost:9001/getuseraccounts', {params: parameter});
   }
 
   public saveUserAccount(userAccount: UserAccount) {
@@ -37,7 +38,8 @@ export class AuthService {
   }
 
   public getContactsByUserId(userId: string): Observable<Contact[]> {
-    return this.http.get<Contact[]>('http://localhost:9001/contacts/'+userId);
+    let parameter = new HttpParams().set('userId', userId);
+    return this.http.get<Contact[]>('http://localhost:9001/contacts', {params: parameter});
   }
 
   public saveConnection(contact: Contact) {
