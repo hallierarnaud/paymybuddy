@@ -17,6 +17,9 @@ import { ConnectionListComponent } from './connection-list/connection-list.compo
 import { NewConnectionComponent } from './new-connection/new-connection.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { NewTransactionComponent } from './new-transaction/new-transaction.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ModalErrorComponent } from './modal-error/modal-error.component';
 
 const appRoutes: Routes = [
   { path: 'addUserAccount', component: UseraccountFormComponent},
@@ -42,7 +45,8 @@ const appRoutes: Routes = [
     ConnectionListComponent,
     NewConnectionComponent,
     TransactionListComponent,
-    NewTransactionComponent
+    NewTransactionComponent,
+    ModalErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,9 @@ const appRoutes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
