@@ -8,5 +8,7 @@ public class ExternalTransaction {
   private Long id;
   private String description;
   private Double transferredAmount;
+  private InternalAccount internalAccount;
+  private ExternalAccount externalAccount;
 
 }
