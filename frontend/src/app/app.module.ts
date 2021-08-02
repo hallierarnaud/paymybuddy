@@ -20,6 +20,7 @@ import { NewTransactionComponent } from './new-transaction/new-transaction.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ModalErrorComponent } from './modal-error/modal-error.component';
+import { NewBanktransferComponent } from './new-banktransfer/new-banktransfer.component';
 
 const appRoutes: Routes = [
   { path: 'addUserAccount', component: UseraccountFormComponent},
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'addConnection', canActivate:[AuthGuardService], component: NewConnectionComponent},
   { path: 'transactionList', canActivate:[AuthGuardService], component: TransactionListComponent},
   { path: 'addTransaction', canActivate:[AuthGuardService], component: NewTransactionComponent},
+  { path: 'addBankTransfer', canActivate:[AuthGuardService], component: NewBanktransferComponent},
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: '/not-found' }
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     NewConnectionComponent,
     TransactionListComponent,
     NewTransactionComponent,
-    ModalErrorComponent
+    ModalErrorComponent,
+    NewBanktransferComponent
   ],
   imports: [
     BrowserModule,

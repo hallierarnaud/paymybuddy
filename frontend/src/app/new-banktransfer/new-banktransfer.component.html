@@ -1,0 +1,28 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit(bankTransferForm)" #bankTransferForm="ngForm">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" [(ngModel)]="bankTransfer.description"
+               class="form-control"
+               id="description"
+               name="description"
+               placeholder="Enter the bank transfer description"
+               required #bankTransferDescription="ngModel">
+        <div [hidden]="!bankTransferDescription.pristine" class="alert alert-danger">Description is required</div>
+      </div>
+      <div class="form-group">
+        <label for="transferredAmount">Transferred amount</label>
+        <input type="text" [(ngModel)]="bankTransfer.transferredAmount"
+               class="form-control"
+               id="transferredAmount"
+               name="transferredAmount"
+               placeholder="Enter the transferredAmount"
+               required #transferredAmount="ngModel">
+        <div [hidden]="!transferredAmount.pristine" class="alert alert-danger">Transferred amount is required</div>
+      </div>
+      <button type="submit" [disabled]="!bankTransferForm.form.valid"
+              class="btn btn-success">Submit</button>
+    </form>
+  </div>
+</div>

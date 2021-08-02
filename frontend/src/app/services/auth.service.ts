@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Login} from "../data/login";
 import {Contact} from "../data/contact";
 import {Transaction} from "../data/transaction";
+import {BankTransfer} from "../data/bankTransfer";
 
 @Injectable()
 export class AuthService {
@@ -54,4 +55,7 @@ export class AuthService {
     return this.http.post<Transaction>('http://localhost:9001/internaltransactions', transaction);
   }
 
+  public saveBankTransfer(bankTransfer: BankTransfer) {
+    return this.http.post<BankTransfer>('http://localhost:9001/externaltransactions', bankTransfer);
+  }
 }
