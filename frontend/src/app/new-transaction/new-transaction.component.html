@@ -23,12 +23,14 @@
       </div>
       <div class="form-group">
         <label for="recipientEmail">Recipient Email</label>
-        <input type="text" [(ngModel)]="transaction.recipientInternalAccountEmail"
-               class="form-control"
-               id="recipientEmail"
-               name="recipientEmail"
-               placeholder="Enter the recipient email"
-               required #recipientInternalAccountEmail="ngModel">
+        <select [(ngModel)]="transaction.recipientInternalAccountEmail"
+                class="form-control"
+                id="recipientEmail"
+                name="recipientEmail"
+                required #recipientInternalAccountEmail="ngModel">
+          <option [value]="undefined" selected disabled>Select the recipient email</option>
+          <option [value]="email" *ngFor="let email of emails">{{ email }}</option>
+        </select>
         <div [hidden]="!recipientInternalAccountEmail.pristine" class="alert alert-danger">Recipient email is required</div>
       </div>
       <button type="submit" [disabled]="!transactionForm.form.valid"
