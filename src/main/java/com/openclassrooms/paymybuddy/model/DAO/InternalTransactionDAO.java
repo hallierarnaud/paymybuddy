@@ -29,43 +29,34 @@ public class InternalTransactionDAO {
   MapDAO mapDAO;
 
   public List<InternalTransaction> findAllBySenderAccountId(Long senderAccountId) {
-    List<InternalTransactionEntity> internalTransactions = StreamSupport.stream(internalTransactionRepository.findInternalTransactionEntitiesBySenderAccountEntity_Id(senderAccountId).spliterator(),false)
+    List<InternalTransactionEntity> internalTransactionEntities = StreamSupport.stream(internalTransactionRepository.findInternalTransactionEntitiesBySenderAccountEntity_Id(senderAccountId).spliterator(),false)
             .collect(Collectors.toList());
-    return internalTransactions.stream().map((internalTransactionEntity) -> {
+    return internalTransactionEntities.stream().map((internalTransactionEntity) -> {
       InternalTransaction internalTransaction = new InternalTransaction();
-      internalTransaction.setId(internalTransactionEntity.getId());
-      internalTransaction.setDescription(internalTransactionEntity.getDescription());
-      internalTransaction.setTransferredAmount(internalTransactionEntity.getTransferredAmount());
-      internalTransaction.setSenderInternalAccountId(internalTransactionEntity.getSenderAccountEntity().getId());
-      internalTransaction.setRecipientInternalAccountId(internalTransactionEntity.getRecipientAccountEntity().getId());
+      mapDAO.updateInternalTransactionWithInternalTransactionEntity(internalTransaction, internalTransactionEntity);
       return internalTransaction;
     }).collect(Collectors.toList());
   }
 
   @Transactional
-  public InternalTransactionResponse addInternalTransaction(InternalTransaction internalTransaction) {
+  public InternalTransaction addInternalTransaction(InternalTransaction internalTransaction) {
     InternalTransactionEntity internalTransactionEntity = new InternalTransactionEntity();
     internalTransactionEntity.setDescription(internalTransaction.getDescription());
     internalTransactionEntity.setTransferredAmount(internalTransaction.getTransferredAmount());
-    InternalAccountEntity internalAccountEntityAsSender = internalAccountRepository.findById(internalTransaction.getSenderInternalAccountId()).orElseThrow(() -> new NoSuchElementException("internal account " + internalTransaction.getSenderInternalAccountId() + " doesn't exist"));
-    internalTransactionEntity.setSenderAccountEntity(internalAccountEntityAsSender);
-    InternalAccountEntity internalAccountEntityAsRecipient = internalAccountRepository.findById(internalTransaction.getRecipientInternalAccountId()).orElseThrow(() -> new NoSuchElementException("internal account " + internalTransaction.getRecipientInternalAccountId() + " doesn't exist"));
-    internalTransactionEntity.setRecipientAccountEntity(internalAccountEntityAsRecipient);
+    InternalAccountEntity senderInternalAccountEntity = internalAccountRepository.findById(internalTransaction.getSenderInternalAccount().getId()).orElseThrow(() -> new NoSuchElementException("internal account " + internalTransaction.getSenderInternalAccount().getId() + " doesn't exist"));
+    internalTransactionEntity.setSenderAccountEntity(senderInternalAccountEntity);
+    InternalAccountEntity recipientInternalAccountEntity = internalAccountRepository.findById(internalTransaction.getRecipientInternalAccount().getId()).orElseThrow(() -> new NoSuchElementException("internal account " + internalTransaction.getRecipientInternalAccount().getId() + " doesn't exist"));
+    internalTransactionEntity.setRecipientAccountEntity(recipientInternalAccountEntity);
     internalTransactionRepository.save(internalTransactionEntity);
 
-    internalAccountEntityAsSender.setBalance(internalAccountEntityAsSender.getBalance() - internalTransaction.getTransferredAmount());
-    internalAccountRepository.save(internalAccountEntityAsSender);
+    senderInternalAccountEntity.setBalance(internalTransaction.getSenderInternalAccount().getBalance());
+    internalAccountRepository.save(senderInternalAccountEntity);
 
-    internalAccountEntityAsRecipient.setBalance(internalAccountEntityAsRecipient.getBalance() + (internalTransaction.getTransferredAmount() * 0.95));
-    internalAccountRepository.save(internalAccountEntityAsRecipient);
+    recipientInternalAccountEntity.setBalance(internalTransaction.getRecipientInternalAccount().getBalance());
+    internalAccountRepository.save(recipientInternalAccountEntity);
 
-    InternalTransactionResponse internalTransactionResponse = new InternalTransactionResponse();
-    internalTransactionResponse.setId(internalTransactionEntity.getId());
-    internalTransactionResponse.setDescription(internalTransactionEntity.getDescription());
-    internalTransactionResponse.setTransferredAmount(internalTransactionEntity.getTransferredAmount());
-    internalTransactionResponse.setSenderInternalAccountId(internalTransactionEntity.getSenderAccountEntity().getId());
-    internalTransactionResponse.setRecipientInternalAccountId(internalTransactionEntity.getRecipientAccountEntity().getId());
-    return internalTransactionResponse;
+    internalTransaction.setId(internalTransactionEntity.getId());
+    return internalTransaction;
   }
 
 }

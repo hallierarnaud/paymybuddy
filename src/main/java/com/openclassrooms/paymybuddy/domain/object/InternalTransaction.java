@@ -8,7 +8,7 @@ public class InternalTransaction {
   private Long id;
   private String description;
   private Double transferredAmount;
-  private Long senderInternalAccountId;
-  private Long recipientInternalAccountId;
+  private InternalAccount senderInternalAccount;
+  private InternalAccount recipientInternalAccount;
 
 }
