@@ -4,6 +4,6 @@ export class BankTransfer {
   public description: string;
   public transferredAmount: number;
   public internalAccountId: number;
-  public externalAccountIBAN: number;
+  public externalAccountId: number;
 
 }

@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   authStatus: boolean;
   userId: number;
   internalAccountId: number;
-  externalAccountIBAN: string;
+  externalAccountId: number;
   email: string;
 
   userAccount: UserAccount = {} as UserAccount;
@@ -52,9 +52,9 @@ export class DashboardComponent implements OnInit {
 
   onBankTransfer() {
     this.internalAccountId = this.userAccount.internalAccountId;
-    this.externalAccountIBAN = this.userAccount.iban;
+    this.externalAccountId = this.userAccount.externalAccountId;
     this.email = this.userAccount.email;
-    this.router.navigate(['addBankTransfer'], {state: {internalAccountIdData: this.internalAccountId, externalAccountIBANData: this.externalAccountIBAN, emailData: this.email}});
+    this.router.navigate(['addBankTransfer'], {state: {internalAccountIdData: this.internalAccountId, externalAccountIdData: this.externalAccountId, emailData: this.email}});
   }
 
 }

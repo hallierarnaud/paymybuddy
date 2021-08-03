@@ -26,7 +26,7 @@ export class NewBanktransferComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.bankTransfer.internalAccountId = window.history.state.internalAccountIdData;
-    this.bankTransfer.externalAccountIBAN = window.history.state.externalAccountIBANData;
+    this.bankTransfer.externalAccountId = window.history.state.externalAccountIdData;
     this.userEmail = window.history.state.emailData;
     this.authService.saveBankTransfer(this.bankTransfer).subscribe( result => {
       this.router.navigate(['dashBoard'], {state: {data: this.userEmail}});
