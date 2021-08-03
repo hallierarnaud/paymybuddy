@@ -40,7 +40,7 @@ public class InternalTransactionService {
     senderInternalAccount.setBalance(senderInternalAccount.getBalance() - internalTransaction.getTransferredAmount());
     internalTransaction.setSenderInternalAccount(senderInternalAccount);
     InternalAccount recipientInternalAccount = internalAccountDAO.findById(internalTransactionRequest.getRecipientInternalAccountId());
-    recipientInternalAccount.setBalance(recipientInternalAccount.getBalance() + internalTransaction.getTransferredAmount() * 0.95);
+    recipientInternalAccount.setBalance(recipientInternalAccount.getBalance() + internalTransaction.getTransferredAmount() * 0.995);
     internalTransaction.setRecipientInternalAccount(recipientInternalAccount);
     internalTransactionDAO.addInternalTransaction(internalTransaction);
 

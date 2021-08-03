@@ -44,7 +44,7 @@ public class ExternalTransactionService {
     externalTransaction.setDescription(externalTransactionRequest.getDescription());
     externalTransaction.setTransferredAmount(externalTransactionRequest.getTransferredAmount());
     InternalAccount internalAccount = internalAccountDAO.findById(externalTransactionRequest.getInternalAccountId());
-    internalAccount.setBalance(internalAccount.getBalance() + externalTransaction.getTransferredAmount() * 0.95);
+    internalAccount.setBalance(internalAccount.getBalance() + externalTransaction.getTransferredAmount() * 0.995);
     externalTransaction.setInternalAccount(internalAccount);
     ExternalAccount externalAccount = externalAccountDAO.findById(externalTransactionRequest.getExternalAccountId());
     externalTransaction.setExternalAccount(externalAccount);
