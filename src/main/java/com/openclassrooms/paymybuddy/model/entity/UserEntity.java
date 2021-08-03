@@ -1,7 +1,6 @@
 package com.openclassrooms.paymybuddy.model.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -42,9 +40,6 @@ public class UserEntity {
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
   @JoinColumn(name = "login_id")
   private LoginEntity loginEntity;
-
-  @OneToMany(mappedBy = "userEntityAsContact")
-  private List<ContactEntity> contactEntities;
 
   @OneToOne(mappedBy = "userEntity")
   private ExternalAccountEntity externalAccountEntity;

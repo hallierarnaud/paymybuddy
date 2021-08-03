@@ -33,7 +33,4 @@ public class ExternalAccountEntity {
   @JoinColumn(name = "user_id")
   private UserEntity userEntity;
 
-  @OneToOne(mappedBy = "externalAccountEntity")
-  private ExternalTransactionEntity externalTransactionEntity;
-
 }
