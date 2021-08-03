@@ -51,8 +51,8 @@ public class MapDAO {
     internalTransaction.setId(internalTransactionEntity.getId());
     internalTransaction.setDescription(internalTransactionEntity.getDescription());
     internalTransaction.setTransferredAmount(internalTransactionEntity.getTransferredAmount());
-    internalTransaction.getSenderInternalAccount().setId(internalTransactionEntity.getSenderAccountEntity().getId());
-    internalTransaction.getRecipientInternalAccount().setId(internalTransactionEntity.getRecipientAccountEntity().getId());
+    internalTransaction.setSenderInternalAccountId(internalTransactionEntity.getSenderAccountEntity().getId());
+    internalTransaction.setRecipientInternalAccountId(internalTransactionEntity.getRecipientAccountEntity().getId());
     return internalTransaction;
   }
 

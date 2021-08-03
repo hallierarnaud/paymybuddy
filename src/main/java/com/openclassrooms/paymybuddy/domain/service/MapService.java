@@ -42,8 +42,8 @@ public class MapService {
     internalTransactionResponse.setId(internalTransaction.getId());
     internalTransactionResponse.setDescription(internalTransaction.getDescription());
     internalTransactionResponse.setTransferredAmount(internalTransaction.getTransferredAmount());
-    internalTransactionResponse.setSenderInternalAccountId(internalTransaction.getSenderInternalAccount().getId());
-    internalTransactionResponse.setRecipientInternalAccountId(internalTransaction.getRecipientInternalAccount().getId());
+    internalTransactionResponse.setSenderInternalAccountId(internalTransaction.getSenderInternalAccountId());
+    internalTransactionResponse.setRecipientInternalAccountId(internalTransaction.getRecipientInternalAccountId());
     return internalTransactionResponse;
   }
 

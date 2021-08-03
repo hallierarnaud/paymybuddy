@@ -10,5 +10,7 @@ public class InternalTransaction {
   private Double transferredAmount;
   private InternalAccount senderInternalAccount;
   private InternalAccount recipientInternalAccount;
+  private Long senderInternalAccountId;
+  private Long recipientInternalAccountId;
 
 }
