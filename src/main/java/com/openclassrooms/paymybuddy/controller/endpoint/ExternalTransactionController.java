@@ -37,7 +37,11 @@ public class ExternalTransactionController {
 
   @PostMapping("/externaltransactions")
   public ExternalTransactionResponse addExternalTransaction(@RequestBody ExternalTransactionRequest externalTransactionRequest) {
-    return externalTransactionService.addExternalTransaction(externalTransactionRequest);
+    try {
+      return externalTransactionService.addExternalTransaction(externalTransactionRequest);
+    } catch (IllegalArgumentException e) {
+      throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Sorry but your balance is less than the wished amount to transfer.");
+    }
   }
 
 }

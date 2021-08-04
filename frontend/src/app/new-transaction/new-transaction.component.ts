@@ -5,6 +5,13 @@ import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {NgForm} from "@angular/forms";
 import {Contact} from "../data/contact";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalErrorComponent} from "../modal-error/modal-error.component";
+
+export interface DialogData {
+  errorNumber: string;
+  errorMessage: string;
+}
 
 @Component({
   selector: 'app-new-transaction',
@@ -21,7 +28,8 @@ export class NewTransactionComponent implements OnInit {
   currentSenderInternalAccountId = window.history.state;
 
   constructor(private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private dialog:MatDialog) {
     this.transaction = new Transaction();
   }
 
@@ -42,7 +50,18 @@ export class NewTransactionComponent implements OnInit {
       this.transaction.recipientInternalAccountId = this.userAccount.internalAccountId;
       this.authService.saveTransaction(this.transaction).subscribe(result => {
         this.router.navigate(['transactionList'], {state: {data: this.transaction.senderInternalAccountId}});
+      }, error => {
+        this.errorInsufficientAmount();
       });
+    });
+  }
+
+  errorInsufficientAmount() {
+    this.dialog.open(ModalErrorComponent, {
+      data: {
+        errorNumber: '422',
+        errorMessage: 'Sorry but your balance is less than the wished amount to transfer.'
+      }
     });
   }
 

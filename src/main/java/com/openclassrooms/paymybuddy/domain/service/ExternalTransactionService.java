@@ -47,7 +47,11 @@ public class ExternalTransactionService {
     if (externalTransaction.getTransferredAmount() > 0) {
       internalAccount.setBalance(internalAccount.getBalance() + externalTransaction.getTransferredAmount() * 0.995);
     } else {
-      internalAccount.setBalance(internalAccount.getBalance() + externalTransaction.getTransferredAmount() * 1.005);
+      if (internalAccount.getBalance() < -externalTransactionRequest.getTransferredAmount()) {
+        throw new IllegalArgumentException ("Sorry but your balance is less than the wished amount to transfer.");
+      } else {
+        internalAccount.setBalance(internalAccount.getBalance() + externalTransaction.getTransferredAmount() * 1.005);
+      }
     }
     externalTransaction.setInternalAccount(internalAccount);
     ExternalAccount externalAccount = externalAccountDAO.findById(externalTransactionRequest.getExternalAccountId());
