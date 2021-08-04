@@ -2,6 +2,7 @@ package com.openclassrooms.paymybuddy.domain.service;
 
 import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.UserAccount;
+import com.openclassrooms.paymybuddy.model.DAO.LoginDAO;
 import com.openclassrooms.paymybuddy.model.DAO.UserAccountDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import javax.persistence.EntityExistsException;
+
 import lombok.Data;
 
 @Data
@@ -20,6 +23,9 @@ public class UserAccountService {
 
   @Autowired
   private UserAccountDAO userAccountDAO;
+
+  @Autowired
+  private LoginDAO loginDAO;
 
   public List<UserAccount> getUserAccounts() {
     return StreamSupport.stream(userAccountDAO.findAll().spliterator(),false)
@@ -41,9 +47,9 @@ public class UserAccountService {
   }
 
   public UserAccount addUserAccount (UserAccount userAccount) {
-    /*if (userAccountDAO.existsByEmail(userAccountRequest.getEmail())) {
-      throw new EntityExistsException("email " + userAccountRequest.getEmail() + " already exists");
-    }*/
+    if (loginDAO.existsByEmail(userAccount.getEmail())) {
+      throw new EntityExistsException("email " + userAccount.getEmail() + " already exists");
+    }
     return userAccountDAO.addUserAccount(userAccount);
   }
 

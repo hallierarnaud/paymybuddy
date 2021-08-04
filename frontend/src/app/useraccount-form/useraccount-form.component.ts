@@ -3,6 +3,13 @@ import {UserAccount} from "../data/userAccount";
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {NgForm} from "@angular/forms";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalErrorComponent} from "../modal-error/modal-error.component";
+
+export interface DialogData {
+  errorNumber: string;
+  errorMessage: string;
+}
 
 @Component({
   selector: 'app-useraccount-form',
@@ -16,7 +23,8 @@ export class UseraccountFormComponent implements OnInit {
   email: string;
 
   constructor(private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private dialog:MatDialog) {
     this.userAccount = new UserAccount();
   }
 
@@ -30,8 +38,18 @@ export class UseraccountFormComponent implements OnInit {
       this.authService.signIn();
       this.authStatus = this.authService.isAuth;
       this.router.navigate(['/dashBoard'], {state: {data: this.email}});
+    }, error => {
+      this.errorAlreadyExist();
+    });
+  }
+
+  errorAlreadyExist() {
+    this.dialog.open(ModalErrorComponent, {
+      data: {
+        errorNumber: '422',
+        errorMessage: 'This email already exists in PayMyBuddy application, try to login !'
       }
-    )
+    });
   }
 
 }
