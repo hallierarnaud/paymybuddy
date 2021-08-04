@@ -2,12 +2,9 @@ package com.openclassrooms.paymybuddy.domain.service;
 
 import com.openclassrooms.paymybuddy.controller.DTO.ExternalTransactionRequest;
 import com.openclassrooms.paymybuddy.controller.DTO.ExternalTransactionResponse;
-import com.openclassrooms.paymybuddy.controller.DTO.InternalTransactionRequest;
-import com.openclassrooms.paymybuddy.controller.DTO.InternalTransactionResponse;
 import com.openclassrooms.paymybuddy.domain.object.ExternalAccount;
 import com.openclassrooms.paymybuddy.domain.object.ExternalTransaction;
 import com.openclassrooms.paymybuddy.domain.object.InternalAccount;
-import com.openclassrooms.paymybuddy.domain.object.InternalTransaction;
 import com.openclassrooms.paymybuddy.model.DAO.ExternalAccountDAO;
 import com.openclassrooms.paymybuddy.model.DAO.ExternalTransactionDAO;
 import com.openclassrooms.paymybuddy.model.DAO.InternalAccountDAO;

@@ -1,6 +1,5 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
-import com.openclassrooms.paymybuddy.controller.DTO.InternalTransactionResponse;
 import com.openclassrooms.paymybuddy.domain.object.InternalTransaction;
 import com.openclassrooms.paymybuddy.model.entity.InternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.entity.InternalTransactionEntity;

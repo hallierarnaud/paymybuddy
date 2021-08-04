@@ -1,8 +1,6 @@
 package com.openclassrooms.paymybuddy.model.DAO;
 
-import com.openclassrooms.paymybuddy.domain.object.ExternalAccount;
 import com.openclassrooms.paymybuddy.domain.object.InternalAccount;
-import com.openclassrooms.paymybuddy.model.entity.ExternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.entity.InternalAccountEntity;
 import com.openclassrooms.paymybuddy.model.repository.InternalAccountRepository;
 

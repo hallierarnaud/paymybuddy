@@ -5,12 +5,10 @@ import com.openclassrooms.paymybuddy.controller.DTO.ContactResponse;
 import com.openclassrooms.paymybuddy.domain.object.Contact;
 import com.openclassrooms.paymybuddy.model.DAO.ContactDAO;
 import com.openclassrooms.paymybuddy.model.DAO.LoginDAO;
-import com.openclassrooms.paymybuddy.model.DAO.UserDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;

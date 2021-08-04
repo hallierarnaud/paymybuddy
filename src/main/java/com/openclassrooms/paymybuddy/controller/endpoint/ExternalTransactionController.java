@@ -3,9 +3,7 @@ package com.openclassrooms.paymybuddy.controller.endpoint;
 import com.openclassrooms.paymybuddy.controller.DTO.ExternalTransactionRequest;
 import com.openclassrooms.paymybuddy.controller.DTO.ExternalTransactionResponse;
 import com.openclassrooms.paymybuddy.domain.object.ExternalTransaction;
-import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.service.ExternalTransactionService;
-import com.openclassrooms.paymybuddy.domain.service.LoginService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

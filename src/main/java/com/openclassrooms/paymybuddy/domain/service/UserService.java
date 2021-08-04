@@ -1,16 +1,12 @@
 package com.openclassrooms.paymybuddy.domain.service;
 
 import com.openclassrooms.paymybuddy.controller.DTO.UserRequest;
-import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.object.User;
 import com.openclassrooms.paymybuddy.model.DAO.UserDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;

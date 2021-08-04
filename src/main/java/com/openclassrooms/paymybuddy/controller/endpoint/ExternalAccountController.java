@@ -1,9 +1,7 @@
 package com.openclassrooms.paymybuddy.controller.endpoint;
 
 import com.openclassrooms.paymybuddy.domain.object.ExternalAccount;
-import com.openclassrooms.paymybuddy.domain.object.Login;
 import com.openclassrooms.paymybuddy.domain.service.ExternalAccountService;
-import com.openclassrooms.paymybuddy.domain.service.LoginService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

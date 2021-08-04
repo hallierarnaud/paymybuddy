@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import javax.persistence.EntityExistsException;
-
 import lombok.Data;
 
 @Data
