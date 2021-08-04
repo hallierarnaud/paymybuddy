@@ -12,5 +12,6 @@ public class InternalTransaction {
   private InternalAccount recipientInternalAccount;
   private Long senderInternalAccountId;
   private Long recipientInternalAccountId;
+  private String recipientInternalAccountEmail;
 
 }

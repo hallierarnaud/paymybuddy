@@ -10,5 +10,6 @@ public class InternalTransactionResponse {
   private Double transferredAmount;
   private Long senderInternalAccountId;
   private Long recipientInternalAccountId;
+  private String recipientInternalAccountEmail;
 
 }

@@ -6,6 +6,7 @@ import com.openclassrooms.paymybuddy.domain.object.InternalAccount;
 import com.openclassrooms.paymybuddy.domain.object.InternalTransaction;
 import com.openclassrooms.paymybuddy.model.DAO.InternalAccountDAO;
 import com.openclassrooms.paymybuddy.model.DAO.InternalTransactionDAO;
+import com.openclassrooms.paymybuddy.model.DAO.LoginDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +26,16 @@ public class InternalTransactionService {
   private InternalAccountDAO internalAccountDAO;
 
   @Autowired
+  private LoginDAO loginDAO;
+
+  @Autowired
   private MapService mapService;
 
   public List<InternalTransaction> getInternalTransactionsBySenderAccountId(final Long senderAccountId) {
     List<InternalTransaction> internalTransactions = internalTransactionDAO.findAllBySenderAccountId(senderAccountId);
+    for (InternalTransaction internalTransaction : internalTransactions) {
+      internalTransaction.setRecipientInternalAccountEmail(loginDAO.findByUserId(internalTransaction.getRecipientInternalAccountId()).getEmail());
+    }
     return internalTransactions;
   }
 

@@ -12,8 +12,8 @@
         <th scope="col">Transaction Id</th>
         <th scope="col">Description</th>
         <th scope="col">Transferred amount</th>
-        <th scope="col">Sender Id</th>
         <th scope="col">Recipient Id</th>
+        <th scope="col">Recipient Email</th>
       </tr>
       </thead>
       <tbody>
@@ -21,8 +21,8 @@
         <td>{{ transaction.id }}</td>
         <td>{{ transaction.description }}</td>
         <td>{{ transaction.transferredAmount }}</td>
-        <td>{{ transaction.senderInternalAccountId }}</td>
         <td>{{ transaction.recipientInternalAccountId }}</td>
+        <td>{{ transaction.recipientInternalAccountEmail }}</td>
       </tr>
       </tbody>
     </table>
