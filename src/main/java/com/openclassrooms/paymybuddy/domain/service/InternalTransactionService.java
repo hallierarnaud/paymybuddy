@@ -55,7 +55,14 @@ public class InternalTransactionService {
       internalTransactionDAO.addInternalTransaction(internalTransaction);
     }
 
-    InternalTransactionResponse internalTransactionResponse = mapService.convertInternalTransactionToInternalTransactionResponse(internalTransaction);
+    //InternalTransactionResponse internalTransactionResponse = mapService.convertInternalTransactionToInternalTransactionResponse(internalTransaction);
+    InternalTransactionResponse internalTransactionResponse = new InternalTransactionResponse();
+    internalTransactionResponse.setId(internalTransaction.getId());
+    internalTransactionResponse.setDescription(internalTransaction.getDescription());
+    internalTransactionResponse.setTransferredAmount(internalTransaction.getTransferredAmount());
+    internalTransactionResponse.setSenderInternalAccountId(internalTransaction.getSenderInternalAccountId());
+    internalTransactionResponse.setRecipientInternalAccountId(internalTransaction.getRecipientInternalAccountId());
+    internalTransactionResponse.setRecipientInternalAccountEmail(internalTransaction.getRecipientInternalAccountEmail());
     return internalTransactionResponse;
   }
 
