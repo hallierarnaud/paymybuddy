@@ -20,17 +20,27 @@ import java.util.NoSuchElementException;
 
 import javax.persistence.EntityExistsException;
 
+/**
+ * a class to perform CRUD operations on user
+ */
 @RestController
 public class UserController {
 
   @Autowired
   private UserService userService;
 
+  /**
+   * @return a list of all users in the database
+   */
   @GetMapping("/users")
   public List<User> getPersons() {
     return userService.getUsers();
   }
 
+  /**
+   * @param id a user's id
+   * @return a user corresponding to the id
+   */
   @GetMapping("/users/{id}")
   public User getUserById(@PathVariable("id") long id) {
     try {
@@ -40,6 +50,11 @@ public class UserController {
     }
   }
 
+  /**
+   * @param id a user's id
+   * @param userRequest a user defined by his attributes
+   * @return update the user in the database
+   */
   @PutMapping("/users/{id}")
   public User updateUser(@PathVariable("id") long id, @RequestBody UserRequest userRequest) {
     try {
@@ -49,6 +64,10 @@ public class UserController {
     }
   }
 
+  /**
+   * @param userRequest a user defined by his attributes
+   * @return add the user to the database
+   */
   @PostMapping("/users")
   public User addUser(@RequestBody UserRequest userRequest) {
     try {
@@ -58,6 +77,10 @@ public class UserController {
     }
   }
 
+  /**
+   * @param id a user's id
+   * delete the user in the database
+   */
   @DeleteMapping("/users/{id}")
   public void deleteUserById(@PathVariable("id") long id) {
     try {

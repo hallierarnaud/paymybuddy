@@ -22,6 +22,9 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
 
+/**
+ * a class to perform CRUD operations on user account
+ */
 @CrossOrigin(origins="*")
 @RestController
 public class UserAccountController {
@@ -32,11 +35,18 @@ public class UserAccountController {
   @Autowired
   private MapService mapService;
 
+  /**
+   * @return a list of all user accounts in the database
+   */
   @GetMapping("/useraccounts")
   public List<UserAccountResponse> getUserAccounts() {
     return userAccountService.getUserAccounts().stream().map(p -> mapService.convertUserAccountToUserAccountResponse(p)).collect(Collectors.toList());
   }
 
+  /**
+   * @param login a login defined by his attributes
+   * @return the user account corresponding to the login
+   */
   @PostMapping("/checkuseraccounts")
   public UserAccountResponse checkUserAccount(@RequestBody Login login) {
     try {
@@ -46,6 +56,10 @@ public class UserAccountController {
     }
   }
 
+  /**
+   * @param email a user's email
+   * @return the user account corresponding to the email
+   */
   @GetMapping("/getuseraccounts")
   public UserAccountResponse getUserAccountByLogin(@RequestParam("email") String email) {
     try {
@@ -55,6 +69,10 @@ public class UserAccountController {
     }
   }
 
+  /**
+   * @param userAccount a user account defined by his attributes
+   * @return add the user account to the database
+   */
   @PostMapping("/useraccounts")
   public UserAccount addUserAccount(@RequestBody UserAccount userAccount) {
     try {

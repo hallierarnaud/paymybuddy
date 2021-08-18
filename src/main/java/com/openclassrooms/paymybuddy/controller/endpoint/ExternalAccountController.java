@@ -12,12 +12,19 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.NoSuchElementException;
 
+/**
+ * a class to perform CRUD operations on external account
+ */
 @RestController
 public class ExternalAccountController {
 
   @Autowired
   private ExternalAccountService externalAccountService;
 
+  /**
+   * @param id an external account's id
+   * @return an external account corresponding to the id
+   */
   @GetMapping("/externalaccounts/{id}")
   public ExternalAccount getExternalAccountById(@PathVariable("id") long id) {
     try {

@@ -12,12 +12,19 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.NoSuchElementException;
 
+/**
+ * a class to perform CRUD operations on internal account
+ */
 @RestController
 public class InternalAccountController {
 
   @Autowired
   private InternalAccountService internalAccountService;
 
+  /**
+   * @param id an internal account's id
+   * @return an internal account corresponding to the id
+   */
   @GetMapping("/internalaccounts/{id}")
   public InternalAccount getInternalAccountById(@PathVariable("id") long id) {
     try {

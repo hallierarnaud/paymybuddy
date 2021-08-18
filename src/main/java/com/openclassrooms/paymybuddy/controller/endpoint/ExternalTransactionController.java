@@ -17,6 +17,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.NoSuchElementException;
 
+/**
+ * a class to perform CRUD operations on external transaction
+ */
 @CrossOrigin(origins="*")
 @RestController
 public class ExternalTransactionController {
@@ -24,6 +27,10 @@ public class ExternalTransactionController {
   @Autowired
   private ExternalTransactionService externalTransactionService;
 
+  /**
+   * @param id an external transaction's id
+   * @return an external transaction corresponding to the id
+   */
   @GetMapping("/externaltransactions/{id}")
   public ExternalTransaction getExternalTransactionById(@PathVariable("id") long id) {
     try {
@@ -33,6 +40,10 @@ public class ExternalTransactionController {
     }
   }
 
+  /**
+   * @param externalTransactionRequest an external transaction defined by his attributes
+   * @return add the external transaction to the database
+   */
   @PostMapping("/externaltransactions")
   public ExternalTransactionResponse addExternalTransaction(@RequestBody ExternalTransactionRequest externalTransactionRequest) {
     try {

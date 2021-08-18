@@ -18,6 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * a class to perform CRUD operations on internal transaction
+ */
 @CrossOrigin(origins="*")
 @RestController
 public class InternalTransactionController {
@@ -28,11 +31,19 @@ public class InternalTransactionController {
   @Autowired
   private MapService mapService;
 
+  /**
+   * @param id an internal transaction's id
+   * @return an internal account corresponding to the id
+   */
   @GetMapping("/internaltransactions/{id}")
   public List<InternalTransactionResponse> getInternalTransactionsBySenderAccountId(@PathVariable("id") long id) {
     return internalTransactionService.getInternalTransactionsBySenderAccountId(id).stream().map(p -> mapService.convertInternalTransactionToInternalTransactionResponse(p)).collect(Collectors.toList());
   }
 
+  /**
+   * @param internalTransactionRequest an internal account defined by his attributes
+   * @return add the internal account to the database
+   */
   @PostMapping("/internaltransactions")
   public InternalTransactionResponse addInternalTransaction(@RequestBody InternalTransactionRequest internalTransactionRequest) {
     try {

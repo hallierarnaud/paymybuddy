@@ -17,6 +17,9 @@ import java.util.NoSuchElementException;
 
 import javax.persistence.EntityExistsException;
 
+/**
+ * a class to perform CRUD operations on login
+ */
 @RestController
 @CrossOrigin(origins="*")
 public class LoginController {
@@ -24,6 +27,10 @@ public class LoginController {
   @Autowired
   private LoginService loginService;
 
+  /**
+   * @param id a login's id
+   * @return a login corresponding to the id
+   */
   @GetMapping("/logins/{id}")
   public Login getLoginById(@PathVariable("id") long id) {
     try {
@@ -33,6 +40,10 @@ public class LoginController {
     }
   }
 
+  /**
+   * @param login a login defined by his attributes
+   * @return add the login to the database
+   */
   @PostMapping("/logins")
   public Login addLogin(@RequestBody Login login) {
     try {

@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityExistsException;
 
+/**
+ * a class to perform CRUD operations on contact
+ */
 @CrossOrigin(origins="*")
 @RestController
 public class ContactController {
@@ -30,11 +33,19 @@ public class ContactController {
   @Autowired
   private MapService mapService;
 
+  /**
+   * @param id the logged user's id
+   * @return a list of the logged user's contact
+   */
   @GetMapping("/contacts")
   public List<ContactResponse> getContactsByUserId(@RequestParam(name = "userId") long id) {
     return contactService.getContactsByUserId(id).stream().map(p -> mapService.convertContactToContactResponse(p)).collect(Collectors.toList());
   }
 
+  /**
+   * @param contactRequest a contact defined by his attributes
+   * @return add the contact to the database
+   */
   @PostMapping("/contacts")
   public ContactResponse addContact(@RequestBody ContactRequest contactRequest) {
     try {

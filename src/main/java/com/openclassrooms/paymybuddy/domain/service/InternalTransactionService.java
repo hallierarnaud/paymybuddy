@@ -42,13 +42,22 @@ public class InternalTransactionService {
   public InternalTransactionResponse addInternalTransaction(InternalTransactionRequest internalTransactionRequest) {
     InternalTransaction internalTransaction = new InternalTransaction();
     InternalAccount senderInternalAccount = internalAccountDAO.findById(internalTransactionRequest.getSenderInternalAccountId());
+    /**
+     * check that the balance of the user's account is sufficient to perform the transaction
+     */
     if (senderInternalAccount.getBalance() < internalTransactionRequest.getTransferredAmount()) {
       throw new IllegalArgumentException ("Sorry but your balance is less than the wished amount to transfer.");
     } else {
       internalTransaction.setDescription(internalTransactionRequest.getDescription());
       internalTransaction.setTransferredAmount(internalTransactionRequest.getTransferredAmount());
+      /**
+       * update the balance of the user's account resulting of the transaction
+       */
       senderInternalAccount.setBalance(senderInternalAccount.getBalance() - internalTransaction.getTransferredAmount());
       internalTransaction.setSenderInternalAccount(senderInternalAccount);
+      /**
+       * update the balance of the recipient's account resulting of the transaction taking into account the fees
+       */
       InternalAccount recipientInternalAccount = internalAccountDAO.findById(internalTransactionRequest.getRecipientInternalAccountId());
       recipientInternalAccount.setBalance(recipientInternalAccount.getBalance() + internalTransaction.getTransferredAmount() * 0.995);
       internalTransaction.setRecipientInternalAccount(recipientInternalAccount);
