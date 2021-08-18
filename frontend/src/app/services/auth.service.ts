@@ -7,6 +7,9 @@ import {Contact} from "../data/contact";
 import {Transaction} from "../data/transaction";
 import {BankTransfer} from "../data/bankTransfer";
 
+/**
+ * a class to communicate with the backend
+ */
 @Injectable()
 export class AuthService {
 

@@ -10,6 +10,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./dashboard.component.scss'],
   providers: [DatePipe]
 })
+
+/**
+ * a class to present the user's dashboard
+ */
 export class DashboardComponent implements OnInit {
 
   authStatus: boolean;
@@ -25,6 +29,9 @@ export class DashboardComponent implements OnInit {
               private datePipe: DatePipe) {
   }
 
+  /**
+   * a method to present the logged user account information
+   */
   ngOnInit() {
     this.authStatus = this.authService.isAuth;
     const loginEmail = window.history.state;
@@ -34,6 +41,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  /**
+   * a method to log out
+   */
   onSignOut() {
     this.authService.signOut();
     this.authStatus = this.authService.isAuth;

@@ -12,6 +12,10 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
+
+/**
+ * a class to sign in
+ */
 export class SigninComponent implements OnInit {
 
   authStatus: boolean;
@@ -29,6 +33,9 @@ export class SigninComponent implements OnInit {
     this.authStatus = this.authService.isAuth;
   }
 
+  /**
+   * @param form a form to input the sign in information (username and email)
+   */
   onCheckLogin(form: NgForm) {
     this.authService.checkLogin(this.login).subscribe(userAccount => {
       this.email = userAccount.email;
@@ -41,6 +48,9 @@ export class SigninComponent implements OnInit {
     );
   }
 
+  /**
+   * a popup to inform that the input sign in information are wrong
+   */
   errorUnknownLogin() {
     this.dialog.open(ModalErrorComponent, {
       data: {

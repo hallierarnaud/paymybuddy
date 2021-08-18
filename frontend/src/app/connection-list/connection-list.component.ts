@@ -8,6 +8,10 @@ import {Router} from "@angular/router";
   templateUrl: './connection-list.component.html',
   styleUrls: ['./connection-list.component.scss']
 })
+
+/**
+ * a class to get the logged user's contact list
+ */
 export class ConnectionListComponent implements OnInit {
 
   contacts: Contact[];

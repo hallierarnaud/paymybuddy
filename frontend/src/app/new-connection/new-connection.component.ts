@@ -7,6 +7,9 @@ import {UserAccount} from "../data/userAccount";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalErrorComponent} from "../modal-error/modal-error.component";
 
+/**
+ * a class to add a contact
+ */
 export interface DialogData {
   errorNumber: string;
   errorMessage: string;
@@ -35,6 +38,9 @@ export class NewConnectionComponent implements OnInit {
     this.authStatus = this.authService.isAuth;
   }
 
+  /**
+   * @param form a form to input the email of the wished contact
+   */
   onSubmit(form: NgForm) {
     const currentUserId = window.history.state;
     this.contact.userId = currentUserId.transferredData.data;
@@ -51,6 +57,9 @@ export class NewConnectionComponent implements OnInit {
     });
   }
 
+  /**
+   * a popup to inform that the contact already exists
+   */
   errorAlreadyExist() {
     this.dialog.open(ModalErrorComponent, {
       data: {
@@ -60,6 +69,9 @@ export class NewConnectionComponent implements OnInit {
     });
   }
 
+  /**
+   * a popup to inform that the input email doesn't exist in the database
+   */
   errorUnknownAddress() {
     this.dialog.open(ModalErrorComponent, {
       data: {

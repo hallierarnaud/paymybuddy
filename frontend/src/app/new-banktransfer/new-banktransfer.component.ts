@@ -16,6 +16,10 @@ export interface DialogData {
   templateUrl: './new-banktransfer.component.html',
   styleUrls: ['./new-banktransfer.component.scss']
 })
+
+/**
+ * a class to create a bank transfer from or to an external account
+ */
 export class NewBanktransferComponent implements OnInit {
 
   authStatus: boolean;
@@ -32,6 +36,9 @@ export class NewBanktransferComponent implements OnInit {
     this.authStatus = this.authService.isAuth;
   }
 
+  /**
+   * @param form a form to input bank transfer's information
+   */
   onSubmit(form: NgForm) {
     this.bankTransfer.internalAccountId = window.history.state.internalAccountIdData;
     this.bankTransfer.externalAccountId = window.history.state.externalAccountIdData;
@@ -43,6 +50,9 @@ export class NewBanktransferComponent implements OnInit {
     });
   }
 
+  /**
+   * a popup to inform that the balance is insufficient to perform the transaction
+   */
   errorInsufficientAmount() {
     this.dialog.open(ModalErrorComponent, {
       data: {

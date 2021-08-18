@@ -8,6 +8,10 @@ import {Router} from "@angular/router";
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss']
 })
+
+/**
+ * a class to get the logged user's transaction list
+ */
 export class TransactionListComponent implements OnInit {
 
   transactions: Transaction[];

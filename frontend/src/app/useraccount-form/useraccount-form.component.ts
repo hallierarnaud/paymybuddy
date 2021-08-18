@@ -16,6 +16,10 @@ export interface DialogData {
   templateUrl: './useraccount-form.component.html',
   styleUrls: ['./useraccount-form.component.scss']
 })
+
+/**
+ * a class to create a user account
+ */
 export class UseraccountFormComponent implements OnInit {
 
   authStatus: boolean;
@@ -32,6 +36,9 @@ export class UseraccountFormComponent implements OnInit {
     this.authStatus = this.authService.isAuth;
   }
 
+  /**
+   * @param form a form to input user account's data
+   */
   onSubmit(form: NgForm) {
     this.authService.saveUserAccount(this.userAccount).subscribe(result => {
       this.email = this.userAccount.email;
@@ -43,6 +50,9 @@ export class UseraccountFormComponent implements OnInit {
     });
   }
 
+  /**
+   * a popup to inform that the input email already exists
+   */
   errorAlreadyExist() {
     this.dialog.open(ModalErrorComponent, {
       data: {

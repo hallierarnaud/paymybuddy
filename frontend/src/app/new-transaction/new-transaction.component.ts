@@ -18,6 +18,10 @@ export interface DialogData {
   templateUrl: './new-transaction.component.html',
   styleUrls: ['./new-transaction.component.scss']
 })
+
+/**
+ * a class to create a transaction
+ */
 export class NewTransactionComponent implements OnInit {
 
   authStatus: boolean;
@@ -43,6 +47,9 @@ export class NewTransactionComponent implements OnInit {
     });
   }
 
+  /**
+   * @param form a form to input transaction's information
+   */
   onSubmit(form: NgForm) {
     this.transaction.senderInternalAccountId = this.currentSenderInternalAccountId.transferredData.data;
     this.authService.getUserAccountByEmail(this.transaction.recipientInternalAccountEmail).subscribe(userAccount => {
@@ -56,6 +63,9 @@ export class NewTransactionComponent implements OnInit {
     });
   }
 
+  /**
+   * a popup to inform that the balance is insufficient to perform the transaction
+   */
   errorInsufficientAmount() {
     this.dialog.open(ModalErrorComponent, {
       data: {
